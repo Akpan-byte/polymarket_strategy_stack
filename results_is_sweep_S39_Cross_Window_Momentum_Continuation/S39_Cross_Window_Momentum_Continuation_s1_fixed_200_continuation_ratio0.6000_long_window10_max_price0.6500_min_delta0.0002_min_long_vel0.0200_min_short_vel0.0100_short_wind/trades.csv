@@ -1,0 +1,3 @@
+market_id,strategy,side,entry_time,entry_price,shares,exit_time,exit_price,fee_paid,pnl,reason
+2957670,S39_Cross_Window_Momentum_Continuation,NO,1784366356.477884,0.160000,5,1784366399.961805,1.000000,0.003613,4.196387,cross_momentum sv=-0.020 lv=-0.030
+2965356,S39_Cross_Window_Momentum_Continuation,YES,1784415292.320742,0.190000,5,1784415299.994711,0.000000,0.005625,-0.955625,cross_momentum sv=0.030 lv=0.050

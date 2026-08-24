@@ -1,0 +1,133 @@
+Discovered 21 strategies
+Building cache...
+Cached 1143 markets
+[S22_EndcycleThreshold_Sniper_s3_pctmin_150] n=181 pnl=$-5.87 wr=97.8% sharpe=-0.414 dd=7.2%
+[S21_WindowDelta_Purist_s3_pctmin_150] n=481 pnl=$77.51 wr=86.9% sharpe=1.128 dd=7.0%
+[S29_TimeDecay_Extremity_s1_fixed_200] n=246 pnl=$-91.33 wr=5.7% sharpe=-1.015 dd=59.3%
+[S23_DualOracle_Winner_s2_pctmin_200] n=93 pnl=$2.47 wr=67.7% sharpe=0.124 dd=7.2%
+[S23_DualOracle_Winner_s1_fixed_200] n=12 pnl=$-5.52 wr=8.3% sharpe=-3.037 dd=3.3%
+[S25_MomentumSnipe_Hedge_s3_pctmin_150] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S29_TimeDecay_Extremity_s2_pctmin_200] n=246 pnl=$-91.33 wr=5.7% sharpe=-1.015 dd=59.3%
+[S29_TimeDecay_Extremity_s3_pctmin_150] n=246 pnl=$-65.50 wr=5.7% sharpe=-1.001 dd=57.2%
+[S21_WindowDelta_Purist_s1_fixed_200] n=20 pnl=$0.09 wr=15.0% sharpe=0.023 dd=5.1%
+[S25_MomentumSnipe_Hedge_s2_pctmin_200] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S22_EndcycleThreshold_Sniper_s1_fixed_200] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S22_EndcycleThreshold_Sniper_s2_pctmin_200] n=181 pnl=$-5.87 wr=97.8% sharpe=-0.414 dd=5.4%
+[S21_WindowDelta_Purist_s2_pctmin_200] n=481 pnl=$77.21 wr=86.9% sharpe=1.123 dd=5.4%
+[S25_MomentumSnipe_Hedge_s1_fixed_200] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S23_DualOracle_Winner_s3_pctmin_150] n=93 pnl=$4.57 wr=67.7% sharpe=0.231 dd=9.3%
+[S31_ALIGNED_Mode_s1_fixed_200] n=1 pnl=$4.10 wr=100.0% sharpe=0.000 dd=0.0%
+[S35_5m_Lead_15m_Entry_s2_pctmin_200] n=84 pnl=$16.79 wr=75.0% sharpe=0.846 dd=13.8%
+[S35_5m_Lead_15m_Entry_s1_fixed_200] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S35_5m_Lead_15m_Entry_s3_pctmin_150] n=84 pnl=$16.79 wr=75.0% sharpe=0.846 dd=18.1%
+[S41_PostShakeout_Reversal_s1_fixed_200] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S41_PostShakeout_Reversal_s2_pctmin_200] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S41_PostShakeout_Reversal_s3_pctmin_150] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S24_TWAP_Reversal_s3_pctmin_150] n=578 pnl=$-149.69 wr=35.1% sharpe=-1.015 dd=99.8%
+[S31_ALIGNED_Mode_s3_pctmin_150] n=799 pnl=$-8.10 wr=64.2% sharpe=-0.040 dd=41.4%
+[S31_ALIGNED_Mode_s2_pctmin_200] n=799 pnl=$-8.10 wr=64.2% sharpe=-0.040 dd=33.4%
+[S39_Cross_Window_Momentum_Continuation_s2_pctmin_200] n=845 pnl=$17.33 wr=66.7% sharpe=0.082 dd=26.2%
+[S32_MOMENTUM_Mode_s2_pctmin_200] n=375 pnl=$2.50 wr=66.7% sharpe=0.027 dd=19.4%
+[S32_MOMENTUM_Mode_s3_pctmin_150] n=375 pnl=$2.50 wr=66.7% sharpe=0.027 dd=24.9%
+[S39_Cross_Window_Momentum_Continuation_s1_fixed_200] n=3 pnl=$7.69 wr=66.7% sharpe=8.179 dd=0.4%
+[S39_Cross_Window_Momentum_Continuation_s3_pctmin_150] n=845 pnl=$17.33 wr=66.7% sharpe=0.082 dd=31.8%
+[S32_MOMENTUM_Mode_s1_fixed_200] n=1 pnl=$-0.75 wr=0.0% sharpe=0.000 dd=0.4%
+[S24_TWAP_Reversal_s1_fixed_200] n=4 pnl=$1.58 wr=25.0% sharpe=1.455 dd=0.8%
+[S24_TWAP_Reversal_s2_pctmin_200] n=829 pnl=$-199.99 wr=35.5% sharpe=-0.941 dd=100.0%
+[S48_VelocityFlip_Reversal_s2_pctmin_200] n=2 pnl=$-2.06 wr=0.0% sharpe=-52.414 dd=1.0%
+[S43_Bollinger_RSI_Reversal_s3_pctmin_150] n=1065 pnl=$-89.83 wr=46.3% sharpe=-0.318 dd=63.8%
+[S48_VelocityFlip_Reversal_s1_fixed_200] n=1 pnl=$-0.90 wr=0.0% sharpe=0.000 dd=0.5%
+[S48_VelocityFlip_Reversal_s3_pctmin_150] n=2 pnl=$-1.91 wr=0.0% sharpe=-30.763 dd=1.3%
+[S43_Bollinger_RSI_Reversal_s1_fixed_200] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S43_Bollinger_RSI_Reversal_s2_pctmin_200] n=1065 pnl=$-89.83 wr=46.3% sharpe=-0.318 dd=48.3%
+[S42_First60s_FakeoutFade_s3_pctmin_150] n=16 pnl=$-4.99 wr=31.2% sharpe=-1.309 dd=4.4%
+[S55_RapidProbability_ChangeChase_s1_fixed_200] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S42_First60s_FakeoutFade_s2_pctmin_200] n=16 pnl=$-4.99 wr=31.2% sharpe=-1.309 dd=3.3%
+[S51_OrderBook_Imbalance_s2_pctmin_200] n=23 pnl=$-4.66 wr=26.1% sharpe=-0.663 dd=4.4%
+[S51_OrderBook_Imbalance_s1_fixed_200] n=6 pnl=$4.63 wr=16.7% sharpe=1.784 dd=1.3%
+[S42_First60s_FakeoutFade_s1_fixed_200] n=1 pnl=$-0.55 wr=0.0% sharpe=0.000 dd=0.3%
+[S55_RapidProbability_ChangeChase_s2_pctmin_200] n=948 pnl=$-128.42 wr=36.4% sharpe=-4.241 dd=64.4%
+[S55_RapidProbability_ChangeChase_s3_pctmin_150] n=948 pnl=$-128.42 wr=36.4% sharpe=-4.241 dd=85.8%
+[S51_OrderBook_Imbalance_s3_pctmin_150] n=23 pnl=$-8.41 wr=26.1% sharpe=-1.494 dd=7.3%
+[S66_SevenTrigger_ExitStack_s1_fixed_200] n=1 pnl=$-0.05 wr=0.0% sharpe=0.000 dd=0.0%
+[S66_SevenTrigger_ExitStack_s3_pctmin_150] n=797 pnl=$-100.55 wr=20.2% sharpe=-4.827 dd=67.5%
+[S66_SevenTrigger_ExitStack_s2_pctmin_200] n=797 pnl=$-100.55 wr=20.2% sharpe=-4.827 dd=50.7%
+[S33_MACD_RSI_VWAP_Stack_s2_pctmin_200] n=76 pnl=$-198.98 wr=10.5% sharpe=-13.588 dd=99.5%
+[S52_Liquidity_Momentum_s1_fixed_200] n=0 pnl=$0.00 wr=0.0% sharpe=0.000 dd=0.0%
+[S69_Complementary_ExitDiscipline_s3_pctmin_150] n=801 pnl=$-104.79 wr=46.1% sharpe=-2.041 dd=70.6%
+[S69_Complementary_ExitDiscipline_s1_fixed_200] n=1 pnl=$3.05 wr=100.0% sharpe=0.000 dd=0.0%
+[S69_Complementary_ExitDiscipline_s2_pctmin_200] n=801 pnl=$-104.79 wr=46.1% sharpe=-2.041 dd=53.0%
+[S52_Liquidity_Momentum_s3_pctmin_150] n=1009 pnl=$-118.53 wr=19.5% sharpe=-3.900 dd=79.2%
+[S33_MACD_RSI_VWAP_Stack_s3_pctmin_150] n=49 pnl=$-149.75 wr=4.1% sharpe=-26.881 dd=99.8%
+[S33_MACD_RSI_VWAP_Stack_s1_fixed_200] n=1 pnl=$-1.01 wr=0.0% sharpe=0.000 dd=0.5%
+[S52_Liquidity_Momentum_s2_pctmin_200] n=1009 pnl=$-118.53 wr=19.5% sharpe=-3.900 dd=59.4%
+[S47_SpotRebound_LagReversion_s2_pctmin_200] n=2 pnl=$18.00 wr=50.0% sharpe=5.929 dd=0.5%
+[S47_SpotRebound_LagReversion_s1_fixed_200] n=2 pnl=$18.00 wr=50.0% sharpe=5.929 dd=0.5%
+[S47_SpotRebound_LagReversion_s3_pctmin_150] n=2 pnl=$13.50 wr=50.0% sharpe=5.929 dd=0.5%
+
+All done in 19.9s. Summary: results_is/summary.json
+Report written to results_is/report.md
+/config/.local/bin/rclone sync --transfers 8 --checkers 16 /home/akpan/polymarket_strategy_stack/results_is polybacktest:results
+Traceback (most recent call last):
+  File "/home/akpan/polymarket_strategy_stack/runners/sync_drive.py", line 41, in <module>
+    main()
+    ~~~~^^
+  File "/home/akpan/polymarket_strategy_stack/runners/sync_drive.py", line 35, in main
+    ok &= sync(args.results, "results", args.dry_run)
+          ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/akpan/polymarket_strategy_stack/runners/sync_drive.py", line 19, in sync
+    result = subprocess.run(cmd, capture_output=True, text=True)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1875, in _execute_child
+    self._posix_spawn(args, executable, env, restore_signals, close_fds,
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      p2cread, p2cwrite,
+                      ^^^^^^^^^^^^^^^^^^
+                      c2pread, c2pwrite,
+                      ^^^^^^^^^^^^^^^^^^
+                      errread, errwrite)
+                      ^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1819, in _posix_spawn
+    self.pid = os.posix_spawn(executable, args, env, **kwargs)
+               ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/config/.local/bin/rclone'
+
+>>> python3 runners/run_all.py --data /home/akpan/polybacktest_btc5m/is/ --cache cache/markets.pkl --out-dir results_is --workers 16
+  Cannot map S21_WindowDelta_Purist_s3_pctmin_150 to module; skipping sweep
+  Cannot map S21_WindowDelta_Purist_s2_pctmin_200 to module; skipping sweep
+  Cannot map S39_Cross_Window_Momentum_Continuation_s2_pctmin_200 to module; skipping sweep
+  Cannot map S39_Cross_Window_Momentum_Continuation_s3_pctmin_150 to module; skipping sweep
+  Cannot map S35_5m_Lead_15m_Entry_s2_pctmin_200 to module; skipping sweep
+
+Top 5 strategies to sweep; swept 0:
+  S21_WindowDelta_Purist_s3_pctmin_150  PnL=$77.51  Sharpe=1.128
+  S21_WindowDelta_Purist_s2_pctmin_200  PnL=$77.21  Sharpe=1.123
+  S39_Cross_Window_Momentum_Continuation_s2_pctmin_200  PnL=$17.33  Sharpe=0.082
+  S39_Cross_Window_Momentum_Continuation_s3_pctmin_150  PnL=$17.33  Sharpe=0.082
+  S35_5m_Lead_15m_Entry_s2_pctmin_200  PnL=$16.79  Sharpe=0.846
+
+>>> python3 runners/report.py --summary results_is/summary.json --out results_is/report.md
+
+>>> python3 runners/sync_drive.py --results results_is --docs docs
+Traceback (most recent call last):
+  File "/home/akpan/polymarket_strategy_stack/runners/master.py", line 101, in <module>
+    main()
+    ~~~~^^
+  File "/home/akpan/polymarket_strategy_stack/runners/master.py", line 95, in main
+    run(["python3", "runners/sync_drive.py", "--results", args.out_dir, "--docs", "docs"])
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/akpan/polymarket_strategy_stack/runners/master.py", line 19, in run
+    raise RuntimeError(f"Command failed: {' '.join(cmd)}")
+RuntimeError: Command failed: python3 runners/sync_drive.py --results results_is --docs docs

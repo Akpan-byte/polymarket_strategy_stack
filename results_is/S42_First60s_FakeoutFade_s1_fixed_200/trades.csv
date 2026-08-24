@@ -1,0 +1,2 @@
+market_id,strategy,side,entry_time,entry_price,shares,exit_time,exit_price,fee_paid,pnl,reason
+2987312,S42_First60s_FakeoutFade,NO,1784547054.133679,0.110000,5,1784547300.004816,0.000000,0.001318,-0.551318,"first60s_fakeout side=NO cur=0.1628% extreme=(-0.0095%,0.2183%) twap=0.1684%"

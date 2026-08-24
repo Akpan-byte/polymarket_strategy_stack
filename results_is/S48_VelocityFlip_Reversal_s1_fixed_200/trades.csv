@@ -1,0 +1,2 @@
+market_id,strategy,side,entry_time,entry_price,shares,exit_time,exit_price,fee_paid,pnl,reason
+2967912,S48_VelocityFlip_Reversal,NO,1784426832.170089,0.030000,30,1784426999.936535,0.000000,0.000191,-0.900191,velocity_flip side=NO prior=0.0949% current=-0.0344%

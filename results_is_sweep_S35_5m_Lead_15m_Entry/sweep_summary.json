@@ -1,0 +1,1726 @@
+[
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0150",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 83,
+      "n_wins": 65,
+      "n_losses": 18,
+      "win_rate": 0.7831325301204819,
+      "profit_factor": 1.5342697236732603,
+      "total_pnl": 32.915694252624995,
+      "avg_win": 1.4542223463826924,
+      "avg_loss": 3.4227087923472226,
+      "expectancy": 0.39657462954969874,
+      "avg_trade_pnl": 0.39657462954969874,
+      "std_trade_pnl": 2.03737013540769,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 5.446242548569861,
+      "max_dd_dollar": 12.378195060124995,
+      "peak_to_trough_dd_pct": 5.446242548569861,
+      "start_of_day_to_trough_dd_pct": 3.8667570523480728,
+      "sharpe": 1.813533679593165,
+      "sortino": 14.653560803381595,
+      "calmar": 2.6591675193954014,
+      "psr": 0.9496698727913229,
+      "skewness": -1.3161760979922987,
+      "kurtosis": -0.17439206847160804,
+      "pnl_percentiles": {
+        "5": -3.6316830129874993,
+        "25": 1.217041015625,
+        "50": 1.314550825875,
+        "75": 1.5105378563750003,
+        "95": 1.807210707125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0150",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 83,
+      "n_wins": 65,
+      "n_losses": 18,
+      "win_rate": 0.7831325301204819,
+      "profit_factor": 1.5342697236732603,
+      "total_pnl": 32.915694252624995,
+      "avg_win": 1.4542223463826924,
+      "avg_loss": 3.4227087923472226,
+      "expectancy": 0.39657462954969874,
+      "avg_trade_pnl": 0.39657462954969874,
+      "std_trade_pnl": 2.03737013540769,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 6.982303202055171,
+      "max_dd_dollar": 12.378195060124995,
+      "peak_to_trough_dd_pct": 6.982303202055171,
+      "start_of_day_to_trough_dd_pct": 4.980805391411011,
+      "sharpe": 1.8135336795931642,
+      "sortino": 14.653560803381591,
+      "calmar": 2.6591675193954014,
+      "psr": 0.9496698727913229,
+      "skewness": -1.316176097992298,
+      "kurtosis": -0.17439206847160982,
+      "pnl_percentiles": {
+        "5": -3.6316830129874993,
+        "25": 1.217041015625,
+        "50": 1.314550825875,
+        "75": 1.5105378563750003,
+        "95": 1.807210707125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 85,
+      "n_wins": 66,
+      "n_losses": 19,
+      "win_rate": 0.7764705882352941,
+      "profit_factor": 1.507006297925437,
+      "total_pnl": 32.342463108874995,
+      "avg_win": 1.4565683507803031,
+      "avg_loss": 3.3574235811907895,
+      "expectancy": 0.38049956598676465,
+      "avg_trade_pnl": 0.38049956598676465,
+      "std_trade_pnl": 2.0367767898188367,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 5.460013474702249,
+      "max_dd_dollar": 12.378195060124995,
+      "peak_to_trough_dd_pct": 5.460013474702249,
+      "start_of_day_to_trough_dd_pct": 3.8766979637117367,
+      "sharpe": 1.7405293954244423,
+      "sortino": 9.440049112037846,
+      "calmar": 2.61285776737052,
+      "psr": 0.9438509033390821,
+      "skewness": -1.2843298736396553,
+      "kurtosis": -0.24686235515507526,
+      "pnl_percentiles": {
+        "5": -3.6267877219749995,
+        "25": 1.217041015625,
+        "50": 1.314550825875,
+        "75": 1.5105378563750003,
+        "95": 1.807210707125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 85,
+      "n_wins": 66,
+      "n_losses": 19,
+      "win_rate": 0.7764705882352941,
+      "profit_factor": 1.507006297925437,
+      "total_pnl": 32.342463108874995,
+      "avg_win": 1.4565683507803031,
+      "avg_loss": 3.3574235811907895,
+      "expectancy": 0.38049956598676465,
+      "avg_trade_pnl": 0.38049956598676465,
+      "std_trade_pnl": 2.0367767898188367,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 7.004953630646426,
+      "max_dd_dollar": 12.378195060124995,
+      "peak_to_trough_dd_pct": 7.004953630646426,
+      "start_of_day_to_trough_dd_pct": 4.997311829699461,
+      "sharpe": 1.7405293954244425,
+      "sortino": 9.440049112037846,
+      "calmar": 2.61285776737052,
+      "psr": 0.9438509033390821,
+      "skewness": -1.2843298736396556,
+      "kurtosis": -0.24686235515507482,
+      "pnl_percentiles": {
+        "5": -3.6267877219749995,
+        "25": 1.217041015625,
+        "50": 1.314550825875,
+        "75": 1.5105378563750003,
+        "95": 1.807210707125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0050_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 85,
+      "n_wins": 66,
+      "n_losses": 19,
+      "win_rate": 0.7764705882352941,
+      "profit_factor": 1.507006297925437,
+      "total_pnl": 32.342463108874995,
+      "avg_win": 1.4565683507803031,
+      "avg_loss": 3.3574235811907895,
+      "expectancy": 0.38049956598676465,
+      "avg_trade_pnl": 0.38049956598676465,
+      "std_trade_pnl": 2.0367767898188367,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 5.460013474702249,
+      "max_dd_dollar": 12.378195060124995,
+      "peak_to_trough_dd_pct": 5.460013474702249,
+      "start_of_day_to_trough_dd_pct": 3.8766979637117367,
+      "sharpe": 1.7405293954244423,
+      "sortino": 9.440049112037846,
+      "calmar": 2.61285776737052,
+      "psr": 0.9438509033390821,
+      "skewness": -1.2843298736396553,
+      "kurtosis": -0.24686235515507526,
+      "pnl_percentiles": {
+        "5": -3.6267877219749995,
+        "25": 1.217041015625,
+        "50": 1.314550825875,
+        "75": 1.5105378563750003,
+        "95": 1.807210707125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0050_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 85,
+      "n_wins": 66,
+      "n_losses": 19,
+      "win_rate": 0.7764705882352941,
+      "profit_factor": 1.507006297925437,
+      "total_pnl": 32.342463108874995,
+      "avg_win": 1.4565683507803031,
+      "avg_loss": 3.3574235811907895,
+      "expectancy": 0.38049956598676465,
+      "avg_trade_pnl": 0.38049956598676465,
+      "std_trade_pnl": 2.0367767898188367,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 7.004953630646426,
+      "max_dd_dollar": 12.378195060124995,
+      "peak_to_trough_dd_pct": 7.004953630646426,
+      "start_of_day_to_trough_dd_pct": 4.997311829699461,
+      "sharpe": 1.7405293954244425,
+      "sortino": 9.440049112037846,
+      "calmar": 2.61285776737052,
+      "psr": 0.9438509033390821,
+      "skewness": -1.2843298736396556,
+      "kurtosis": -0.24686235515507482,
+      "pnl_percentiles": {
+        "5": -3.6267877219749995,
+        "25": 1.217041015625,
+        "50": 1.314550825875,
+        "75": 1.5105378563750003,
+        "95": 1.807210707125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0080_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 85,
+      "n_wins": 66,
+      "n_losses": 19,
+      "win_rate": 0.7764705882352941,
+      "profit_factor": 1.507006297925437,
+      "total_pnl": 32.342463108874995,
+      "avg_win": 1.4565683507803031,
+      "avg_loss": 3.3574235811907895,
+      "expectancy": 0.38049956598676465,
+      "avg_trade_pnl": 0.38049956598676465,
+      "std_trade_pnl": 2.0367767898188367,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 5.460013474702249,
+      "max_dd_dollar": 12.378195060124995,
+      "peak_to_trough_dd_pct": 5.460013474702249,
+      "start_of_day_to_trough_dd_pct": 3.8766979637117367,
+      "sharpe": 1.7405293954244423,
+      "sortino": 9.440049112037846,
+      "calmar": 2.61285776737052,
+      "psr": 0.9438509033390821,
+      "skewness": -1.2843298736396553,
+      "kurtosis": -0.24686235515507526,
+      "pnl_percentiles": {
+        "5": -3.6267877219749995,
+        "25": 1.217041015625,
+        "50": 1.314550825875,
+        "75": 1.5105378563750003,
+        "95": 1.807210707125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0080_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 85,
+      "n_wins": 66,
+      "n_losses": 19,
+      "win_rate": 0.7764705882352941,
+      "profit_factor": 1.507006297925437,
+      "total_pnl": 32.342463108874995,
+      "avg_win": 1.4565683507803031,
+      "avg_loss": 3.3574235811907895,
+      "expectancy": 0.38049956598676465,
+      "avg_trade_pnl": 0.38049956598676465,
+      "std_trade_pnl": 2.0367767898188367,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 7.004953630646426,
+      "max_dd_dollar": 12.378195060124995,
+      "peak_to_trough_dd_pct": 7.004953630646426,
+      "start_of_day_to_trough_dd_pct": 4.997311829699461,
+      "sharpe": 1.7405293954244425,
+      "sortino": 9.440049112037846,
+      "calmar": 2.61285776737052,
+      "psr": 0.9438509033390821,
+      "skewness": -1.2843298736396556,
+      "kurtosis": -0.24686235515507482,
+      "pnl_percentiles": {
+        "5": -3.6267877219749995,
+        "25": 1.217041015625,
+        "50": 1.314550825875,
+        "75": 1.5105378563750003,
+        "95": 1.807210707125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 125,
+      "n_wins": 87,
+      "n_losses": 38,
+      "win_rate": 0.696,
+      "profit_factor": 1.0300409533986306,
+      "total_pnl": 3.8630534429999974,
+      "avg_win": 1.5224822719626436,
+      "avg_loss": 3.3840237952039476,
+      "expectancy": 0.03090442754399998,
+      "avg_trade_pnl": 0.03090442754399998,
+      "std_trade_pnl": 2.282658240508117,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 10.876229520945664,
+      "max_dd_dollar": 24.007350566499923,
+      "peak_to_trough_dd_pct": 10.876229520945664,
+      "start_of_day_to_trough_dd_pct": 6.214331342341641,
+      "sharpe": 0.12613930783085545,
+      "sortino": 0.91333243839712,
+      "calmar": 0.16091127724816656,
+      "psr": 0.5500318494725599,
+      "skewness": -0.8295420184892442,
+      "kurtosis": -1.2549651036409026,
+      "pnl_percentiles": {
+        "5": -3.6365783039999995,
+        "25": -3.143018204,
+        "50": 1.3634216960000003,
+        "75": 1.5597527039999997,
+        "95": 1.9068452373750002
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 125,
+      "n_wins": 87,
+      "n_losses": 38,
+      "win_rate": 0.696,
+      "profit_factor": 1.0300409533986306,
+      "total_pnl": 3.8630534429999974,
+      "avg_win": 1.5224822719626436,
+      "avg_loss": 3.3840237952039476,
+      "expectancy": 0.03090442754399998,
+      "avg_trade_pnl": 0.03090442754399998,
+      "std_trade_pnl": 2.282658240508117,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 14.061400139380467,
+      "max_dd_dollar": 24.007350566499927,
+      "peak_to_trough_dd_pct": 14.061400139380467,
+      "start_of_day_to_trough_dd_pct": 8.128497483988582,
+      "sharpe": 0.12613930783085542,
+      "sortino": 0.9133324383971194,
+      "calmar": 0.16091127724816653,
+      "psr": 0.5500318494725599,
+      "skewness": -0.8295420184892441,
+      "kurtosis": -1.254965103640903,
+      "pnl_percentiles": {
+        "5": -3.6365783039999995,
+        "25": -3.143018204,
+        "50": 1.3634216960000003,
+        "75": 1.5597527039999997,
+        "95": 1.9068452373750002
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0050_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 125,
+      "n_wins": 87,
+      "n_losses": 38,
+      "win_rate": 0.696,
+      "profit_factor": 1.0300409533986306,
+      "total_pnl": 3.8630534429999974,
+      "avg_win": 1.5224822719626436,
+      "avg_loss": 3.3840237952039476,
+      "expectancy": 0.03090442754399998,
+      "avg_trade_pnl": 0.03090442754399998,
+      "std_trade_pnl": 2.282658240508117,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 14.061400139380467,
+      "max_dd_dollar": 24.007350566499927,
+      "peak_to_trough_dd_pct": 14.061400139380467,
+      "start_of_day_to_trough_dd_pct": 8.128497483988582,
+      "sharpe": 0.12613930783085542,
+      "sortino": 0.9133324383971194,
+      "calmar": 0.16091127724816653,
+      "psr": 0.5500318494725599,
+      "skewness": -0.8295420184892441,
+      "kurtosis": -1.254965103640903,
+      "pnl_percentiles": {
+        "5": -3.6365783039999995,
+        "25": -3.143018204,
+        "50": 1.3634216960000003,
+        "75": 1.5597527039999997,
+        "95": 1.9068452373750002
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0050_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 125,
+      "n_wins": 87,
+      "n_losses": 38,
+      "win_rate": 0.696,
+      "profit_factor": 1.0300409533986306,
+      "total_pnl": 3.8630534429999974,
+      "avg_win": 1.5224822719626436,
+      "avg_loss": 3.3840237952039476,
+      "expectancy": 0.03090442754399998,
+      "avg_trade_pnl": 0.03090442754399998,
+      "std_trade_pnl": 2.282658240508117,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 10.876229520945664,
+      "max_dd_dollar": 24.007350566499923,
+      "peak_to_trough_dd_pct": 10.876229520945664,
+      "start_of_day_to_trough_dd_pct": 6.214331342341641,
+      "sharpe": 0.12613930783085545,
+      "sortino": 0.91333243839712,
+      "calmar": 0.16091127724816656,
+      "psr": 0.5500318494725599,
+      "skewness": -0.8295420184892442,
+      "kurtosis": -1.2549651036409026,
+      "pnl_percentiles": {
+        "5": -3.6365783039999995,
+        "25": -3.143018204,
+        "50": 1.3634216960000003,
+        "75": 1.5597527039999997,
+        "95": 1.9068452373750002
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0080_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 125,
+      "n_wins": 87,
+      "n_losses": 38,
+      "win_rate": 0.696,
+      "profit_factor": 1.0300409533986306,
+      "total_pnl": 3.8630534429999974,
+      "avg_win": 1.5224822719626436,
+      "avg_loss": 3.3840237952039476,
+      "expectancy": 0.03090442754399998,
+      "avg_trade_pnl": 0.03090442754399998,
+      "std_trade_pnl": 2.282658240508117,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 14.061400139380467,
+      "max_dd_dollar": 24.007350566499927,
+      "peak_to_trough_dd_pct": 14.061400139380467,
+      "start_of_day_to_trough_dd_pct": 8.128497483988582,
+      "sharpe": 0.12613930783085542,
+      "sortino": 0.9133324383971194,
+      "calmar": 0.16091127724816653,
+      "psr": 0.5500318494725599,
+      "skewness": -0.8295420184892441,
+      "kurtosis": -1.254965103640903,
+      "pnl_percentiles": {
+        "5": -3.6365783039999995,
+        "25": -3.143018204,
+        "50": 1.3634216960000003,
+        "75": 1.5597527039999997,
+        "95": 1.9068452373750002
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0080_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 125,
+      "n_wins": 87,
+      "n_losses": 38,
+      "win_rate": 0.696,
+      "profit_factor": 1.0300409533986306,
+      "total_pnl": 3.8630534429999974,
+      "avg_win": 1.5224822719626436,
+      "avg_loss": 3.3840237952039476,
+      "expectancy": 0.03090442754399998,
+      "avg_trade_pnl": 0.03090442754399998,
+      "std_trade_pnl": 2.282658240508117,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 10.876229520945664,
+      "max_dd_dollar": 24.007350566499923,
+      "peak_to_trough_dd_pct": 10.876229520945664,
+      "start_of_day_to_trough_dd_pct": 6.214331342341641,
+      "sharpe": 0.12613930783085545,
+      "sortino": 0.91333243839712,
+      "calmar": 0.16091127724816656,
+      "psr": 0.5500318494725599,
+      "skewness": -0.8295420184892442,
+      "kurtosis": -1.2549651036409026,
+      "pnl_percentiles": {
+        "5": -3.6365783039999995,
+        "25": -3.143018204,
+        "50": 1.3634216960000003,
+        "75": 1.5597527039999997,
+        "95": 1.9068452373750002
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0150",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 122,
+      "n_wins": 85,
+      "n_losses": 37,
+      "win_rate": 0.6967213114754098,
+      "profit_factor": 1.0227554616006955,
+      "total_pnl": 2.876531882749997,
+      "avg_win": 1.521025250825,
+      "avg_loss": 3.4165030929020266,
+      "expectancy": 0.023578130186475386,
+      "avg_trade_pnl": 0.023578130186475386,
+      "std_trade_pnl": 2.29331192001376,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 11.323160759231197,
+      "max_dd_dollar": 24.99387212674995,
+      "peak_to_trough_dd_pct": 11.323160759231197,
+      "start_of_day_to_trough_dd_pct": 6.214331342341641,
+      "sharpe": 0.09578927073530422,
+      "sortino": 0.8898251728372008,
+      "calmar": 0.11508948546117267,
+      "psr": 0.538064447774971,
+      "skewness": -0.8263772142615433,
+      "kurtosis": -1.2662352551586828,
+      "pnl_percentiles": {
+        "5": -3.6365783039999995,
+        "25": -3.143018204,
+        "50": 1.3634216960000003,
+        "75": 1.5597527039999997,
+        "95": 1.9068452373750002
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0150",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 122,
+      "n_wins": 85,
+      "n_losses": 37,
+      "win_rate": 0.6967213114754098,
+      "profit_factor": 1.0227554616006955,
+      "total_pnl": 2.876531882749997,
+      "avg_win": 1.521025250825,
+      "avg_loss": 3.4165030929020266,
+      "expectancy": 0.023578130186475386,
+      "avg_trade_pnl": 0.023578130186475386,
+      "std_trade_pnl": 2.29331192001376,
+      "min_trade": -3.782958984375,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 14.639217935908105,
+      "max_dd_dollar": 24.99387212674995,
+      "peak_to_trough_dd_pct": 14.639217935908105,
+      "start_of_day_to_trough_dd_pct": 8.128497483988582,
+      "sharpe": 0.09578927073530435,
+      "sortino": 0.8898251728372021,
+      "calmar": 0.11508948546117267,
+      "psr": 0.538064447774971,
+      "skewness": -0.8263772142615434,
+      "kurtosis": -1.2662352551586826,
+      "pnl_percentiles": {
+        "5": -3.6365783039999995,
+        "25": -3.143018204,
+        "50": 1.3634216960000003,
+        "75": 1.5597527039999997,
+        "95": 1.9068452373750002
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0050_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0050_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0050_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0050_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0080_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0080_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0080_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0080_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0150",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0150",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0150",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.7500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0150",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.75
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s1_fixed_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0050_min_delta0.0002_min_lead_move0.0150",
+    "sizing": "s1_fixed_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 0,
+      "total_pnl": 0.0
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0150",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 23,
+      "n_wins": 14,
+      "n_losses": 9,
+      "win_rate": 0.6086956521739131,
+      "profit_factor": 0.9101020814861731,
+      "total_pnl": -2.57408621275,
+      "avg_win": 1.8613820612767857,
+      "avg_loss": 3.181492785625,
+      "expectancy": -0.11191679185869566,
+      "avg_trade_pnl": -0.11191679185869566,
+      "std_trade_pnl": 2.523560719972557,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 11.301248475652448,
+      "max_dd_dollar": 17.559054448875035,
+      "peak_to_trough_dd_pct": 11.301248475652448,
+      "start_of_day_to_trough_dd_pct": 7.755472493606132,
+      "sharpe": -0.4131922123474427,
+      "sortino": -8.587251316707254,
+      "calmar": -0.1465959468515069,
+      "psr": 0.3382648019751108,
+      "skewness": -0.40473992826742294,
+      "kurtosis": -1.8898765636363535,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.1179946464375004,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.2736822045374994
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0150",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 23,
+      "n_wins": 14,
+      "n_losses": 9,
+      "win_rate": 0.6086956521739131,
+      "profit_factor": 0.9101020814861731,
+      "total_pnl": -2.57408621275,
+      "avg_win": 1.8613820612767857,
+      "avg_loss": 3.181492785625,
+      "expectancy": -0.11191679185869566,
+      "avg_trade_pnl": -0.11191679185869566,
+      "std_trade_pnl": 2.523560719972557,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 8.549848535298747,
+      "max_dd_dollar": 17.559054448875028,
+      "peak_to_trough_dd_pct": 8.549848535298747,
+      "start_of_day_to_trough_dd_pct": 5.867326542095163,
+      "sharpe": -0.41319221234744274,
+      "sortino": -8.587251316707258,
+      "calmar": -0.14659594685150695,
+      "psr": 0.3382648019751107,
+      "skewness": -0.4047399282674228,
+      "kurtosis": -1.8898765636363537,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.1179946464375004,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.2736822045374994
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 24,
+      "n_wins": 14,
+      "n_losses": 10,
+      "win_rate": 0.5833333333333334,
+      "profit_factor": 0.8456510104460305,
+      "total_pnl": -4.756375993125,
+      "avg_win": 1.8613820612767857,
+      "avg_loss": 3.0815724850999997,
+      "expectancy": -0.19818233304687502,
+      "avg_trade_pnl": -0.19818233304687502,
+      "std_trade_pnl": 2.504011859499343,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 9.612448297527509,
+      "max_dd_dollar": 19.741344229250018,
+      "peak_to_trough_dd_pct": 9.612448297527509,
+      "start_of_day_to_trough_dd_pct": 6.527689673998973,
+      "sharpe": -0.7373933033566078,
+      "sortino": -5.494128624635319,
+      "calmar": -0.24093475793191704,
+      "psr": 0.2281528268188508,
+      "skewness": -0.32149588143375757,
+      "kurtosis": -1.9341740876651394,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.08059732321875,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.256077637618749
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 24,
+      "n_wins": 14,
+      "n_losses": 10,
+      "win_rate": 0.5833333333333334,
+      "profit_factor": 0.8456510104460305,
+      "total_pnl": -4.756375993125,
+      "avg_win": 1.8613820612767857,
+      "avg_loss": 3.0815724850999997,
+      "expectancy": -0.19818233304687502,
+      "avg_trade_pnl": -0.19818233304687502,
+      "std_trade_pnl": 2.504011859499343,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 12.705800134496172,
+      "max_dd_dollar": 19.741344229250018,
+      "peak_to_trough_dd_pct": 12.705800134496172,
+      "start_of_day_to_trough_dd_pct": 8.628345013744202,
+      "sharpe": -0.7373933033566078,
+      "sortino": -5.4941286246353185,
+      "calmar": -0.24093475793191704,
+      "psr": 0.2281528268188508,
+      "skewness": -0.32149588143375746,
+      "kurtosis": -1.9341740876651394,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.08059732321875,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.256077637618749
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0050_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 24,
+      "n_wins": 14,
+      "n_losses": 10,
+      "win_rate": 0.5833333333333334,
+      "profit_factor": 0.8456510104460305,
+      "total_pnl": -4.756375993125,
+      "avg_win": 1.8613820612767857,
+      "avg_loss": 3.0815724850999997,
+      "expectancy": -0.19818233304687502,
+      "avg_trade_pnl": -0.19818233304687502,
+      "std_trade_pnl": 2.504011859499343,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 9.612448297527509,
+      "max_dd_dollar": 19.741344229250018,
+      "peak_to_trough_dd_pct": 9.612448297527509,
+      "start_of_day_to_trough_dd_pct": 6.527689673998973,
+      "sharpe": -0.7373933033566078,
+      "sortino": -5.494128624635319,
+      "calmar": -0.24093475793191704,
+      "psr": 0.2281528268188508,
+      "skewness": -0.32149588143375757,
+      "kurtosis": -1.9341740876651394,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.08059732321875,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.256077637618749
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0050_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 24,
+      "n_wins": 14,
+      "n_losses": 10,
+      "win_rate": 0.5833333333333334,
+      "profit_factor": 0.8456510104460305,
+      "total_pnl": -4.756375993125,
+      "avg_win": 1.8613820612767857,
+      "avg_loss": 3.0815724850999997,
+      "expectancy": -0.19818233304687502,
+      "avg_trade_pnl": -0.19818233304687502,
+      "std_trade_pnl": 2.504011859499343,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 12.705800134496172,
+      "max_dd_dollar": 19.741344229250018,
+      "peak_to_trough_dd_pct": 12.705800134496172,
+      "start_of_day_to_trough_dd_pct": 8.628345013744202,
+      "sharpe": -0.7373933033566078,
+      "sortino": -5.4941286246353185,
+      "calmar": -0.24093475793191704,
+      "psr": 0.2281528268188508,
+      "skewness": -0.32149588143375746,
+      "kurtosis": -1.9341740876651394,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.08059732321875,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.256077637618749
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0080_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 24,
+      "n_wins": 14,
+      "n_losses": 10,
+      "win_rate": 0.5833333333333334,
+      "profit_factor": 0.8456510104460305,
+      "total_pnl": -4.756375993125,
+      "avg_win": 1.8613820612767857,
+      "avg_loss": 3.0815724850999997,
+      "expectancy": -0.19818233304687502,
+      "avg_trade_pnl": -0.19818233304687502,
+      "std_trade_pnl": 2.504011859499343,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 9.612448297527509,
+      "max_dd_dollar": 19.741344229250018,
+      "peak_to_trough_dd_pct": 9.612448297527509,
+      "start_of_day_to_trough_dd_pct": 6.527689673998973,
+      "sharpe": -0.7373933033566078,
+      "sortino": -5.494128624635319,
+      "calmar": -0.24093475793191704,
+      "psr": 0.2281528268188508,
+      "skewness": -0.32149588143375757,
+      "kurtosis": -1.9341740876651394,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.08059732321875,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.256077637618749
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0080_min_delta0.0003_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0003,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 24,
+      "n_wins": 14,
+      "n_losses": 10,
+      "win_rate": 0.5833333333333334,
+      "profit_factor": 0.8456510104460305,
+      "total_pnl": -4.756375993125,
+      "avg_win": 1.8613820612767857,
+      "avg_loss": 3.0815724850999997,
+      "expectancy": -0.19818233304687502,
+      "avg_trade_pnl": -0.19818233304687502,
+      "std_trade_pnl": 2.504011859499343,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.4101881186250003,
+      "max_dd_pct": 12.705800134496172,
+      "max_dd_dollar": 19.741344229250018,
+      "peak_to_trough_dd_pct": 12.705800134496172,
+      "start_of_day_to_trough_dd_pct": 8.628345013744202,
+      "sharpe": -0.7373933033566078,
+      "sortino": -5.4941286246353185,
+      "calmar": -0.24093475793191704,
+      "psr": 0.2281528268188508,
+      "skewness": -0.32149588143375746,
+      "kurtosis": -1.9341740876651394,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.08059732321875,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.256077637618749
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0150",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 41,
+      "n_wins": 24,
+      "n_losses": 17,
+      "win_rate": 0.5853658536585366,
+      "profit_factor": 0.8406779970760923,
+      "total_pnl": -8.543710284500001,
+      "avg_win": 1.8784048231875001,
+      "avg_loss": 3.154436825941177,
+      "expectancy": -0.20838317767073175,
+      "avg_trade_pnl": -0.20838317767073175,
+      "std_trade_pnl": 2.516056845738736,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 10.861696438168734,
+      "max_dd_dollar": 22.619578722,
+      "peak_to_trough_dd_pct": 10.861696438168734,
+      "start_of_day_to_trough_dd_pct": 6.600220486019335,
+      "sharpe": -0.7716366401555775,
+      "sortino": -14.785569942675876,
+      "calmar": -0.37771305953591056,
+      "psr": 0.21803059273376907,
+      "skewness": -0.3265565639832151,
+      "kurtosis": -1.9197926849517792,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.143018204,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.207886328125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0150",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 41,
+      "n_wins": 24,
+      "n_losses": 17,
+      "win_rate": 0.5853658536585366,
+      "profit_factor": 0.8406779970760923,
+      "total_pnl": -8.543710284500001,
+      "avg_win": 1.8784048231875001,
+      "avg_loss": 3.154436825941177,
+      "expectancy": -0.20838317767073175,
+      "avg_trade_pnl": -0.20838317767073175,
+      "std_trade_pnl": 2.516056845738736,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 14.293492913624428,
+      "max_dd_dollar": 22.619578722,
+      "peak_to_trough_dd_pct": 14.293492913624428,
+      "start_of_day_to_trough_dd_pct": 8.685586573176387,
+      "sharpe": -0.7716366401555772,
+      "sortino": -14.785569942675867,
+      "calmar": -0.37771305953591056,
+      "psr": 0.21803059273376918,
+      "skewness": -0.32655656398321503,
+      "kurtosis": -1.9197926849517792,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.143018204,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.207886328125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0050_min_delta0.0002_min_lead_move0.0150",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.015,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 41,
+      "n_wins": 24,
+      "n_losses": 17,
+      "win_rate": 0.5853658536585366,
+      "profit_factor": 0.8406779970760923,
+      "total_pnl": -8.543710284500001,
+      "avg_win": 1.8784048231875001,
+      "avg_loss": 3.154436825941177,
+      "expectancy": -0.20838317767073175,
+      "avg_trade_pnl": -0.20838317767073175,
+      "std_trade_pnl": 2.516056845738736,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 10.861696438168734,
+      "max_dd_dollar": 22.619578722,
+      "peak_to_trough_dd_pct": 10.861696438168734,
+      "start_of_day_to_trough_dd_pct": 6.600220486019335,
+      "sharpe": -0.7716366401555775,
+      "sortino": -14.785569942675876,
+      "calmar": -0.37771305953591056,
+      "psr": 0.21803059273376907,
+      "skewness": -0.3265565639832151,
+      "kurtosis": -1.9197926849517792,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.143018204,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.207886328125
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 42,
+      "n_wins": 24,
+      "n_losses": 18,
+      "win_rate": 0.5714285714285714,
+      "profit_factor": 0.8078043527313331,
+      "total_pnl": -10.726000064875,
+      "avg_win": 1.8784048231875001,
+      "avg_loss": 3.100428656743055,
+      "expectancy": -0.25538095392559523,
+      "avg_trade_pnl": -0.25538095392559523,
+      "std_trade_pnl": 2.5037787057151015,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 15.672499299845349,
+      "max_dd_dollar": 24.801868502374983,
+      "peak_to_trough_dd_pct": 15.672499299845349,
+      "start_of_day_to_trough_dd_pct": 10.06459295939731,
+      "sharpe": -0.9503054005009912,
+      "sortino": -9.075706303947605,
+      "calmar": -0.4324674192933447,
+      "psr": 0.1690207123181156,
+      "skewness": -0.2801826991402421,
+      "kurtosis": -1.938578284176104,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.13055234365625,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.2028518751124992
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0030_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.003,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 42,
+      "n_wins": 24,
+      "n_losses": 18,
+      "win_rate": 0.5714285714285714,
+      "profit_factor": 0.8078043527313331,
+      "total_pnl": -10.726000064875,
+      "avg_win": 1.8784048231875001,
+      "avg_loss": 3.100428656743055,
+      "expectancy": -0.25538095392559523,
+      "avg_trade_pnl": -0.25538095392559523,
+      "std_trade_pnl": 2.5037787057151015,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 11.909610257690796,
+      "max_dd_dollar": 24.801868502374987,
+      "peak_to_trough_dd_pct": 11.909610257690796,
+      "start_of_day_to_trough_dd_pct": 7.648134305541399,
+      "sharpe": -0.9503054005009917,
+      "sortino": -9.07570630394761,
+      "calmar": -0.4324674192933446,
+      "psr": 0.16902071231811544,
+      "skewness": -0.28018269914024196,
+      "kurtosis": -1.938578284176104,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.13055234365625,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.2028518751124992
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0050_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 42,
+      "n_wins": 24,
+      "n_losses": 18,
+      "win_rate": 0.5714285714285714,
+      "profit_factor": 0.8078043527313331,
+      "total_pnl": -10.726000064875,
+      "avg_win": 1.8784048231875001,
+      "avg_loss": 3.100428656743055,
+      "expectancy": -0.25538095392559523,
+      "avg_trade_pnl": -0.25538095392559523,
+      "std_trade_pnl": 2.5037787057151015,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 11.909610257690796,
+      "max_dd_dollar": 24.801868502374987,
+      "peak_to_trough_dd_pct": 11.909610257690796,
+      "start_of_day_to_trough_dd_pct": 7.648134305541399,
+      "sharpe": -0.9503054005009917,
+      "sortino": -9.07570630394761,
+      "calmar": -0.4324674192933446,
+      "psr": 0.16902071231811544,
+      "skewness": -0.28018269914024196,
+      "kurtosis": -1.938578284176104,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.13055234365625,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.2028518751124992
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0050_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.005,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 42,
+      "n_wins": 24,
+      "n_losses": 18,
+      "win_rate": 0.5714285714285714,
+      "profit_factor": 0.8078043527313331,
+      "total_pnl": -10.726000064875,
+      "avg_win": 1.8784048231875001,
+      "avg_loss": 3.100428656743055,
+      "expectancy": -0.25538095392559523,
+      "avg_trade_pnl": -0.25538095392559523,
+      "std_trade_pnl": 2.5037787057151015,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 15.672499299845349,
+      "max_dd_dollar": 24.801868502374983,
+      "peak_to_trough_dd_pct": 15.672499299845349,
+      "start_of_day_to_trough_dd_pct": 10.06459295939731,
+      "sharpe": -0.9503054005009912,
+      "sortino": -9.075706303947605,
+      "calmar": -0.4324674192933447,
+      "psr": 0.1690207123181156,
+      "skewness": -0.2801826991402421,
+      "kurtosis": -1.938578284176104,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.13055234365625,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.2028518751124992
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s3_pctmin_150_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0080_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s3_pctmin_150",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 42,
+      "n_wins": 24,
+      "n_losses": 18,
+      "win_rate": 0.5714285714285714,
+      "profit_factor": 0.8078043527313331,
+      "total_pnl": -10.726000064875,
+      "avg_win": 1.8784048231875001,
+      "avg_loss": 3.100428656743055,
+      "expectancy": -0.25538095392559523,
+      "avg_trade_pnl": -0.25538095392559523,
+      "std_trade_pnl": 2.5037787057151015,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 15.672499299845349,
+      "max_dd_dollar": 24.801868502374983,
+      "peak_to_trough_dd_pct": 15.672499299845349,
+      "start_of_day_to_trough_dd_pct": 10.06459295939731,
+      "sharpe": -0.9503054005009912,
+      "sortino": -9.075706303947605,
+      "calmar": -0.4324674192933447,
+      "psr": 0.1690207123181156,
+      "skewness": -0.2801826991402421,
+      "kurtosis": -1.938578284176104,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.13055234365625,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.2028518751124992
+      }
+    }
+  },
+  {
+    "label": "S35_5m_Lead_15m_Entry_s2_pctmin_200_confirm_sec30.0000_lead_sec90.0000_max_price0.6500_min_confirm_move0.0080_min_delta0.0002_min_lead_move0.0100",
+    "sizing": "s2_pctmin_200",
+    "params": {
+      "lead_sec": 90.0,
+      "confirm_sec": 30.0,
+      "min_lead_move": 0.01,
+      "min_confirm_move": 0.008,
+      "min_delta": 0.0002,
+      "max_price": 0.65
+    },
+    "metrics": {
+      "n": 42,
+      "n_wins": 24,
+      "n_losses": 18,
+      "win_rate": 0.5714285714285714,
+      "profit_factor": 0.8078043527313331,
+      "total_pnl": -10.726000064875,
+      "avg_win": 1.8784048231875001,
+      "avg_loss": 3.100428656743055,
+      "expectancy": -0.25538095392559523,
+      "avg_trade_pnl": -0.25538095392559523,
+      "std_trade_pnl": 2.5037787057151015,
+      "min_trade": -3.292051953125,
+      "max_trade": 2.359504896,
+      "max_dd_pct": 11.909610257690796,
+      "max_dd_dollar": 24.801868502374987,
+      "peak_to_trough_dd_pct": 11.909610257690796,
+      "start_of_day_to_trough_dd_pct": 7.648134305541399,
+      "sharpe": -0.9503054005009917,
+      "sortino": -9.07570630394761,
+      "calmar": -0.4324674192933446,
+      "psr": 0.16902071231811544,
+      "skewness": -0.28018269914024196,
+      "kurtosis": -1.938578284176104,
+      "pnl_percentiles": {
+        "5": -3.292051953125,
+        "25": -3.13055234365625,
+        "50": 1.707948046875,
+        "75": 1.807210707125,
+        "95": 2.2028518751124992
+      }
+    }
+  }
+]

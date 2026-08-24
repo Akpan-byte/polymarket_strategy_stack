@@ -1,0 +1,3 @@
+market_id,strategy,side,entry_time,entry_price,shares,exit_time,exit_price,fee_paid,pnl,reason
+2985257,S47_SpotRebound_LagReversion,YES,1784524398.248011,0.010000,100,1784524500.004131,0.000000,0.000025,-1.000025,"spot_rebound side=YES cur=-0.3415% past=(-0.4686%,-0.3415%) twap=-0.4432%"
+2988311,S47_SpotRebound_LagReversion,YES,1784555243.686066,0.050000,20,1784555399.935053,1.000000,0.000564,18.999436,"spot_rebound side=YES cur=-0.2512% past=(-0.3620%,-0.2512%) twap=-0.2765%"

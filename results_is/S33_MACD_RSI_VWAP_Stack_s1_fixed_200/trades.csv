@@ -1,0 +1,2 @@
+market_id,strategy,side,entry_time,entry_price,shares,exit_time,exit_price,fee_paid,pnl,reason
+2951651,S33_MACD_RSI_VWAP_Stack,NO,1784324988.069993,0.200000,5,1784324999.892044,0.000000,0.006400,-1.006400,macd_rsi_vwap hist=-0.001 rsi=49.3

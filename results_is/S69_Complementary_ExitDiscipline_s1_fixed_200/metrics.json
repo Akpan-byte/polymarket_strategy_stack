@@ -1,0 +1,32 @@
+{
+  "n": 1,
+  "n_wins": 1,
+  "n_losses": 0,
+  "win_rate": 1.0,
+  "profit_factor": Infinity,
+  "total_pnl": 3.0450982040000003,
+  "avg_win": 3.0450982040000003,
+  "avg_loss": 0.0,
+  "expectancy": 3.0450982040000003,
+  "avg_trade_pnl": 3.0450982040000003,
+  "std_trade_pnl": 0.0,
+  "min_trade": 3.0450982040000003,
+  "max_trade": 3.0450982040000003,
+  "max_dd_pct": 0.0,
+  "max_dd_dollar": 0.0,
+  "peak_to_trough_dd_pct": 0.0,
+  "start_of_day_to_trough_dd_pct": 0.0,
+  "sharpe": 0.0,
+  "sortino": 0.0,
+  "calmar": Infinity,
+  "psr": 0.5,
+  "skewness": 0.0,
+  "kurtosis": 0.0,
+  "pnl_percentiles": {
+    "5": 3.0450982040000003,
+    "25": 3.0450982040000003,
+    "50": 3.0450982040000003,
+    "75": 3.0450982040000003,
+    "95": 3.0450982040000003
+  }
+}

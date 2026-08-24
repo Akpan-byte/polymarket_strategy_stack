@@ -1,0 +1,2 @@
+market_id,strategy,side,entry_time,entry_price,shares,exit_time,exit_price,fee_paid,pnl,reason
+2957670,S31_ALIGNED_Mode,NO,1784366355.608754,0.180000,5,1784366399.961805,1.000000,0.004902,4.095098,aligned vel=-0.010 delta=-0.0201%

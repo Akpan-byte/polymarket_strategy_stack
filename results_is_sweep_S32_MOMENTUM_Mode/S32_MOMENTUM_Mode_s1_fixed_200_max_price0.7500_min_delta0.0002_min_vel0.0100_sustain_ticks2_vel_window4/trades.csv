@@ -1,0 +1,2 @@
+market_id,strategy,side,entry_time,entry_price,shares,exit_time,exit_price,fee_paid,pnl,reason
+2957670,S32_MOMENTUM_Mode,NO,1784366356.477884,0.160000,5,1784366399.961805,1.000000,0.003613,4.196387,momentum vel=-0.020 delta=-0.0201% sustain=2

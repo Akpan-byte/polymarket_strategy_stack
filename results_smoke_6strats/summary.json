@@ -1,0 +1,62 @@
+{
+  "S23_DualOracle_Winner_s1_fixed_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S21_WindowDelta_Purist_s1_fixed_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S21_WindowDelta_Purist_s3_pctmin_150": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S21_WindowDelta_Purist_s2_pctmin_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S23_DualOracle_Winner_s2_pctmin_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S23_DualOracle_Winner_s3_pctmin_150": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S31_ALIGNED_Mode_s1_fixed_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S31_ALIGNED_Mode_s2_pctmin_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S31_ALIGNED_Mode_s3_pctmin_150": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S41_PostShakeout_Reversal_s2_pctmin_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S41_PostShakeout_Reversal_s1_fixed_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S41_PostShakeout_Reversal_s3_pctmin_150": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S51_OrderBook_Imbalance_s1_fixed_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S51_OrderBook_Imbalance_s2_pctmin_200": {
+    "n": 0,
+    "total_pnl": 0.0
+  },
+  "S51_OrderBook_Imbalance_s3_pctmin_150": {
+    "n": 0,
+    "total_pnl": 0.0
+  }
+}
