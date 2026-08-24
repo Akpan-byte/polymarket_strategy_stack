@@ -1,0 +1,315 @@
+name: Polymarket IS Backtest & Sweep
+
+on:
+  workflow_dispatch:
+    inputs:
+      data_release:
+        description: 'GitHub release tag containing IS data tarball'
+        required: true
+        default: 'data-v1'
+      max_sweeps:
+        description: 'Max strategies to sweep'
+        required: true
+        default: '13'
+  push:
+    branches: [main]
+
+env:
+  DATA_DIR: data/btc_5m_is
+  CACHE_PATH: cache/markets.pkl
+
+jobs:
+  setup-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install numpy pandas
+      - name: Download IS data tarball
+        run: |
+          mkdir -p data
+          gh release download "${{ github.event.inputs.data_release || 'data-v1' }}" \
+            --repo "${{ github.repository }}" \
+            --pattern "is_data.tar.gz" \
+            --dir data || true
+          if [ ! -f data/is_data.tar.gz ]; then
+            echo "Data tarball not found. Please create release ${{ github.event.inputs.data_release || 'data-v1' }} with asset is_data.tar.gz"
+            exit 1
+          fi
+          tar xzf data/is_data.tar.gz -C data
+          echo "Data files:"
+          ls -l "$DATA_DIR" | head
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Build cache
+        run: |
+          python3 - <<'PY'
+          import os, sys
+          sys.path.insert(0, os.getcwd())
+          from engine.market import load_markets, cache_markets
+          markets = load_markets(os.environ['DATA_DIR'], workers=4)
+          print(f"Loaded {len(markets)} markets")
+          cache_markets(markets, os.environ['CACHE_PATH'])
+          PY
+      - name: Cache markets
+        uses: actions/cache/save@v4
+        with:
+          path: cache/markets.pkl
+          key: markets-${{ github.run_id }}
+
+  backtest:
+    needs: setup-data
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        strategy_file:
+          - s21_window_delta_purist.py
+          - s22_endcycle_threshold.py
+          - s23_dual_oracle_winner.py
+          - s24_twap_reversal.py
+          - s25_momentum_snipe_hedge.py
+          - s29_time_decay_extremity.py
+          - s31_aligned_mode.py
+          - s32_momentum_mode.py
+          - s33_macd_rsi_vwap.py
+          - s35_five_minute_lead.py
+          - s39_cross_window_momentum.py
+          - s41_post_shakeout_reversal.py
+          - s42_first_60s_fakeout_fade.py
+          - s43_bollinger_rsi_reversal.py
+          - s47_spot_rebound_lag_reversion.py
+          - s48_velocity_flip_reversal.py
+          - s51_ob_imbalance.py
+          - s52_liquidity_momentum.py
+          - s55_rapid_probability_change_chase.py
+          - s66_seven_trigger_exit_stack.py
+          - s69_complementary_exit_discipline.py
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install numpy pandas
+      - name: Restore cache
+        uses: actions/cache/restore@v4
+        with:
+          path: cache/markets.pkl
+          key: markets-${{ github.run_id }}
+          fail-on-cache-miss: true
+      - name: Detect strategy class
+        id: detect
+        run: |
+          CLS=$(python3 - <<"PY"
+          import importlib.util, os
+          fp = os.path.join('strategies', "${{ matrix.strategy_file }}")
+          spec = importlib.util.spec_from_file_location('mod', fp)
+          mod = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(mod)
+          for n in dir(mod):
+              o = getattr(mod, n)
+              if isinstance(o, type) and n.startswith('S') and not n.endswith('Strategy'):
+                  print(n)
+                  break
+          PY
+          )
+          echo "class=$CLS" >> $GITHUB_OUTPUT
+      - name: Run strategy sizings
+        run: |
+          for sk in s1_fixed_200 s2_pctmin_200 s3_pctmin_150; do
+            echo "=== $sk ==="
+            python3 runners/run_strategy.py --data "$DATA_DIR" --cache "$CACHE_PATH" \
+              --strategy-module "strategies/${{ matrix.strategy_file }}" \
+              --strategy-class "${{ steps.detect.outputs.class }}" \
+              --sizing "$sk" --out-dir "results/${{ matrix.strategy_file }}" || true
+          done
+      - name: Upload metrics
+        uses: actions/upload-artifact@v4
+        with:
+          name: backtest-${{ matrix.strategy_file }}
+          path: results/${{ matrix.strategy_file }}/*/
+          if-no-files-found: ignore
+
+  aggregate:
+    needs: backtest
+    runs-on: ubuntu-latest
+    outputs:
+      sweep_matrix: ${{ steps.matrix.outputs.sweep_matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: backtest-*
+      - name: Aggregate and choose sweeps
+        id: matrix
+        run: |
+          python3 - <<'PY'
+          import json, os, glob
+          from pathlib import Path
+          metrics = {}
+          for f in glob.glob('artifacts/backtest-*/**/metrics.json', recursive=True):
+              label = Path(f).parent.name
+              with open(f) as fh:
+                  metrics[label] = json.load(fh)
+          # Save aggregated summary
+          os.makedirs('aggregated', exist_ok=True)
+          with open('aggregated/summary.json', 'w') as fh:
+              json.dump(metrics, fh, indent=2, default=str)
+          # aggregate by base strategy name
+          by_strat = {}
+          for label, m in metrics.items():
+              if m.get('n', 0) < 5:
+                  continue
+              parts = label.rsplit('_', 2)
+              name = parts[0]
+              by_strat.setdefault(name, {'pnl': 0, 'n': 0})
+              by_strat[name]['pnl'] += m.get('total_pnl', 0)
+              by_strat[name]['n'] += m.get('n', 0)
+          positive = sorted([(n, v['pnl'], v['n']) for n, v in by_strat.items() if v['pnl'] > 0], key=lambda x: x[1], reverse=True)
+          max_sweeps = int(os.environ.get('MAX_SWEEPS', 13))
+          chosen = positive[:max_sweeps]
+          module_map = {
+              'S21_WindowDelta_Purist': 's21_window_delta_purist.py',
+              'S22_EndcycleThreshold_Sniper': 's22_endcycle_threshold.py',
+              'S23_DualOracle_Winner': 's23_dual_oracle_winner.py',
+              'S24_TWAP_Reversal': 's24_twap_reversal.py',
+              'S25_MomentumSnipe_Hedge': 's25_momentum_snipe_hedge.py',
+              'S29_TimeDecay_Extremity': 's29_time_decay_extremity.py',
+              'S31_ALIGNED_Mode': 's31_aligned_mode.py',
+              'S32_MOMENTUM_Mode': 's32_momentum_mode.py',
+              'S33_MACD_RSI_VWAP_Stack': 's33_macd_rsi_vwap.py',
+              'S35_5m_Lead_15m_Entry': 's35_five_minute_lead.py',
+              'S39_Cross_Window_Momentum_Continuation': 's39_cross_window_momentum.py',
+              'S41_PostShakeout_Reversal': 's41_post_shakeout_reversal.py',
+              'S42_First60s_FakeoutFade': 's42_first_60s_fakeout_fade.py',
+              'S43_Bollinger_RSI_Reversal': 's43_bollinger_rsi_reversal.py',
+              'S47_SpotRebound_LagReversion': 's47_spot_rebound_lag_reversion.py',
+              'S48_VelocityFlip_Reversal': 's48_velocity_flip_reversal.py',
+              'S51_OrderBook_Imbalance': 's51_ob_imbalance.py',
+              'S52_Liquidity_Momentum': 's52_liquidity_momentum.py',
+              'S55_RapidProbability_ChangeChase': 's55_rapid_probability_change_chase.py',
+              'S66_SevenTrigger_ExitStack': 's66_seven_trigger_exit_stack.py',
+              'S69_Complementary_ExitDiscipline': 's69_complementary_exit_discipline.py',
+          }
+          real_class = {
+              'S21': 'S21WindowDeltaPurist', 'S22': 'S22EndcycleThreshold', 'S23': 'S23DualOracleWinner',
+              'S24': 'S24TwapReversal', 'S25': 'S25MomentumSnipeHedge', 'S29': 'S29TimeDecayExtremity',
+              'S31': 'S31AlignedMode', 'S32': 'S32MomentumMode', 'S33': 'S33MacdRsiVwap',
+              'S35': 'S35FiveMinuteLead', 'S39': 'S39CrossWindowMomentum', 'S41': 'S41PostShakeoutReversal',
+              'S42': 'S42First60sFakeoutFade', 'S43': 'S43BollingerRsiReversal', 'S47': 'S47SpotReboundLagReversion',
+              'S48': 'S48VelocityFlipReversal', 'S51': 'S51OrderBookImbalance', 'S52': 'S52LiquidityMomentum',
+              'S55': 'S55RapidProbabilityChangeChase', 'S66': 'S66SevenTriggerExitStack', 'S69': 'S69ComplementaryExitDiscipline',
+          }
+          matrix = {'include': []}
+          for name, pnl, n in chosen:
+              mod = module_map.get(name)
+              cid = name.split('_')[0]
+              cls = real_class.get(cid)
+              if not mod or not cls:
+                  continue
+              matrix['include'].append({
+                  'strategy_name': name,
+                  'module': f'strategies/{mod}',
+                  'class': cls
+              })
+          print(json.dumps(matrix, indent=2))
+          with open(os.environ.get('GITHUB_OUTPUT', '/tmp/gh_output'), 'a') as fh:
+              fh.write(f"sweep_matrix={json.dumps(matrix)}\n")
+          PY
+      - name: Upload aggregated summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: aggregated-summary
+          path: aggregated/
+        env:
+          MAX_SWEEPS: ${{ github.event.inputs.max_sweeps || 13 }}
+
+  sweep:
+    needs: aggregate
+    runs-on: ubuntu-latest
+    if: needs.aggregate.outputs.sweep_matrix != '' && needs.aggregate.outputs.sweep_matrix != '{"include": []}'
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.aggregate.outputs.sweep_matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install numpy pandas
+      - name: Restore cache
+        uses: actions/cache/restore@v4
+        with:
+          path: cache/markets.pkl
+          key: markets-${{ github.run_id }}
+          fail-on-cache-miss: true
+      - name: Sweep strategy
+        run: |
+          python3 runners/sweep.py --data "$DATA_DIR" --cache "$CACHE_PATH" \
+            --strategy-module "${{ matrix.module }}" \
+            --strategy-class "${{ matrix.class }}" \
+            --out-dir "sweeps/${{ matrix.strategy_name }}" \
+            --workers 4 --max-combos 50
+      - name: Upload sweep results
+        uses: actions/upload-artifact@v4
+        with:
+          name: sweep-${{ matrix.strategy_name }}
+          path: sweeps/${{ matrix.strategy_name }}/
+
+  report:
+    needs: [backtest, sweep]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install numpy pandas
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: '*'
+      - name: Build summary and report
+        run: |
+          python3 - <<'PY'
+          import json, glob, os
+          from pathlib import Path
+          metrics = {}
+          for f in glob.glob('artifacts/backtest-*/**/metrics.json', recursive=True):
+              label = Path(f).parent.name
+              with open(f) as fh:
+                  metrics[label] = json.load(fh)
+          with open('summary.json', 'w') as fh:
+              json.dump(metrics, fh, indent=2, default=str)
+          print(f"Aggregated {len(metrics)} metric files")
+          PY
+          python3 runners/report.py --summary summary.json --out FINAL_REPORT.md
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: final-report
+          path: |
+            FINAL_REPORT.md
+            summary.json
+            artifacts/**/sweep_summary.json
+      - name: Install rclone
+        run: curl https://rclone.org/install.sh | bash
+      - name: Sync to Google Drive
+        run: |
+          mkdir -p ~/.config/rclone
+          printf '%s\n' "$RCLONE_CONFIG" > ~/.config/rclone/rclone.conf
+          rclone sync artifacts polybacktest:results/gh_actions/${{ github.run_id }}
+          rclone copy FINAL_REPORT.md polybacktest:results/gh_actions/${{ github.run_id }}/
+          rclone copy summary.json polybacktest:results/gh_actions/${{ github.run_id }}/
+        env:
+          RCLONE_CONFIG: ${{ secrets.RCLONE_CONFIG }}
