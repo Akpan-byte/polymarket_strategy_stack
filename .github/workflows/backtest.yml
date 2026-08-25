@@ -171,6 +171,8 @@ jobs:
           pattern: backtest-*
       - name: Aggregate and choose sweeps
         id: matrix
+        env:
+          MAX_SWEEPS: ${{ github.event.inputs.max_sweeps || '13' }}
         run: |
           python3 - <<'PY'
           import json, os, glob
@@ -315,6 +317,7 @@ jobs:
 
   report:
     needs: [backtest, sweep]
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
