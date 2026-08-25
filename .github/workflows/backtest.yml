@@ -39,7 +39,8 @@ jobs:
             echo "Data tarball not found. Please create release ${{ github.event.inputs.data_release || 'data-v1' }} with asset is_data.tar.gz"
             exit 1
           fi
-          tar xzf data/is_data.tar.gz -C data
+          mkdir -p "$DATA_DIR"
+          tar xzf data/is_data.tar.gz -C "$DATA_DIR"
           echo "Data files:"
           ls -l "$DATA_DIR" | head
         env:
