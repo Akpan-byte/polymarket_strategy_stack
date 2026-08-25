@@ -87,12 +87,13 @@ class S70FourChannelConfluence(Strategy):
         # Channel 4: Volatility-adjusted momentum from spot returns.
         returns = np.zeros(n)
         returns[w:] = (market.spot[w:] - market.spot[:-w]) / market.spot[:-w]
+        # Rolling std of pct_changes over window w (vectorized).
         vol = np.zeros(n)
-        for i in range(w, n):
-            chunk = market.spot[i - w + 1 : i + 1]
-            pct_changes = np.diff(chunk) / chunk[:-1]
-            v = float(np.std(pct_changes)) if len(pct_changes) > 0 else 0.0
-            vol[i] = v
+        if n > w:
+            pct_changes = np.diff(market.spot) / market.spot[:-1]
+            from numpy.lib.stride_tricks import sliding_window_view
+            slices = sliding_window_view(pct_changes, w)
+            vol[w:] = np.std(slices, axis=1)
         with np.errstate(divide="ignore", invalid="ignore"):
             momentum = np.where(
                 vol > 1e-12,
