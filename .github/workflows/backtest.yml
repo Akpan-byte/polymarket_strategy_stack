@@ -79,17 +79,39 @@ jobs:
           - s32_momentum_mode.py
           - s33_macd_rsi_vwap.py
           - s35_five_minute_lead.py
+          - s38_sticky_lagging_market_convergence.py
           - s39_cross_window_momentum.py
+          - s40_cascade_trailing_logic.py
           - s41_post_shakeout_reversal.py
           - s42_first_60s_fakeout_fade.py
           - s43_bollinger_rsi_reversal.py
+          - s44_bollinger_stoch_rsi_double_extreme.py
+          - s45_ema_rsi_stoch_triple_confirmation.py
+          - s46_vwap_deviation_snapback.py
           - s47_spot_rebound_lag_reversion.py
           - s48_velocity_flip_reversal.py
+          - s49_markov_chain_state_transition.py
+          - s50_bollinger_squeeze_breakout.py
           - s51_ob_imbalance.py
           - s52_liquidity_momentum.py
+          - s53_coinbase_book_rti_anticipation.py
+          - s54_tick_acceleration_spread_compression.py
           - s55_rapid_probability_change_chase.py
+          - s56_whale_wallet_onchain_frontrun.py
+          - s57_economic_release_prepositioning.py
+          - s58_post_release_drift_continuation.py
+          - s59_binance_boundary_stop_hunt_fade.py
+          - s60_elon_tweet_burst_filter.py
+          - s61_session_only_engine_restriction.py
+          - s62_neural_ensemble_classifier.py
+          - s63_llm_filtered_trend_veto.py
+          - s64_markov_regime_switched_routing.py
+          - s65_adaptive_self_tuner.py
           - s66_seven_trigger_exit_stack.py
+          - s67_dynamic_hedge_flip.py
+          - s68_price_field_staged_exits.py
           - s69_complementary_exit_discipline.py
+          - s70_four_channel_confluence.py
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -186,26 +208,52 @@ jobs:
               'S32_MOMENTUM_Mode': 's32_momentum_mode.py',
               'S33_MACD_RSI_VWAP_Stack': 's33_macd_rsi_vwap.py',
               'S35_5m_Lead_15m_Entry': 's35_five_minute_lead.py',
+              'S38_Sticky_Lagging_Market_Convergence': 's38_sticky_lagging_market_convergence.py',
               'S39_Cross_Window_Momentum_Continuation': 's39_cross_window_momentum.py',
+              'S40_Cascade_Trailing_Logic': 's40_cascade_trailing_logic.py',
               'S41_PostShakeout_Reversal': 's41_post_shakeout_reversal.py',
               'S42_First60s_FakeoutFade': 's42_first_60s_fakeout_fade.py',
               'S43_Bollinger_RSI_Reversal': 's43_bollinger_rsi_reversal.py',
+              'S44_Bollinger_Stoch_RSI_Double_Extreme': 's44_bollinger_stoch_rsi_double_extreme.py',
+              'S45_EMA_RSI_Stoch_Triple_Confirmation': 's45_ema_rsi_stoch_triple_confirmation.py',
+              'S46_VWAP_Deviation_Snapback': 's46_vwap_deviation_snapback.py',
               'S47_SpotRebound_LagReversion': 's47_spot_rebound_lag_reversion.py',
               'S48_VelocityFlip_Reversal': 's48_velocity_flip_reversal.py',
+              'S49_Markov_Chain_State_Transition': 's49_markov_chain_state_transition.py',
+              'S50_Bollinger_Squeeze_Breakout': 's50_bollinger_squeeze_breakout.py',
               'S51_OrderBook_Imbalance': 's51_ob_imbalance.py',
               'S52_Liquidity_Momentum': 's52_liquidity_momentum.py',
+              'S53_Coinbase_Book_RTI_Anticipation': 's53_coinbase_book_rti_anticipation.py',
+              'S54_Tick_Acceleration_Spread_Compression': 's54_tick_acceleration_spread_compression.py',
               'S55_RapidProbability_ChangeChase': 's55_rapid_probability_change_chase.py',
+              'S56_Whale_Wallet_OnChain_FrontRun': 's56_whale_wallet_onchain_frontrun.py',
+              'S57_Economic_Release_Prepositioning': 's57_economic_release_prepositioning.py',
+              'S58_Post_Release_Drift_Continuation': 's58_post_release_drift_continuation.py',
+              'S59_Binance_Boundary_StopHunt_Fade': 's59_binance_boundary_stop_hunt_fade.py',
+              'S60_Elon_Tweet_Burst_Filter': 's60_elon_tweet_burst_filter.py',
+              'S61_SessionOnly_Engine_Restriction': 's61_session_only_engine_restriction.py',
+              'S62_Neural_Ensemble_Classifier': 's62_neural_ensemble_classifier.py',
+              'S63_LLM_Filtered_Trend_Veto': 's63_llm_filtered_trend_veto.py',
+              'S64_Markov_Regime_Switched_Routing': 's64_markov_regime_switched_routing.py',
+              'S65_Adaptive_Self_Tuner': 's65_adaptive_self_tuner.py',
               'S66_SevenTrigger_ExitStack': 's66_seven_trigger_exit_stack.py',
+              'S67_Dynamic_Hedge_Flip': 's67_dynamic_hedge_flip.py',
+              'S68_Price_Field_Staged_Exits': 's68_price_field_staged_exits.py',
               'S69_Complementary_ExitDiscipline': 's69_complementary_exit_discipline.py',
+              'S70_Four_Channel_Confluence': 's70_four_channel_confluence.py',
           }
           real_class = {
-              'S21': 'S21WindowDeltaPurist', 'S22': 'S22EndcycleThreshold', 'S23': 'S23DualOracleWinner',
-              'S24': 'S24TwapReversal', 'S25': 'S25MomentumSnipeHedge', 'S29': 'S29TimeDecayExtremity',
-              'S31': 'S31AlignedMode', 'S32': 'S32MomentumMode', 'S33': 'S33MacdRsiVwap',
-              'S35': 'S35FiveMinuteLead', 'S39': 'S39CrossWindowMomentum', 'S41': 'S41PostShakeoutReversal',
-              'S42': 'S42First60sFakeoutFade', 'S43': 'S43BollingerRsiReversal', 'S47': 'S47SpotReboundLagReversion',
-              'S48': 'S48VelocityFlipReversal', 'S51': 'S51OrderBookImbalance', 'S52': 'S52LiquidityMomentum',
-              'S55': 'S55RapidProbabilityChangeChase', 'S66': 'S66SevenTriggerExitStack', 'S69': 'S69ComplementaryExitDiscipline',
+              'S21': 'S21WindowDeltaPurist', 'S22': 'S22EndcycleThreshold', 'S23': 'S23DualOracleWinner', 'S24': 'S24TwapReversal',
+              'S25': 'S25MomentumSnipeHedge', 'S29': 'S29TimeDecayExtremity', 'S31': 'S31AlignedMode', 'S32': 'S32MomentumMode',
+              'S33': 'S33MacdRsiVwap', 'S35': 'S35FiveMinuteLead', 'S38': 'S38StickyLaggingMarketConvergence', 'S39': 'S39CrossWindowMomentum',
+              'S40': 'S40CascadeTrailingLogic', 'S41': 'S41PostShakeoutReversal', 'S42': 'S42First60sFakeoutFade', 'S43': 'S43BollingerRsiReversal',
+              'S44': 'S44BollingerStochRsiDoubleExtreme', 'S45': 'S45EmaRsiStochTripleConfirmation', 'S46': 'S46VwapDeviationSnapback', 'S47': 'S47SpotReboundLagReversion',
+              'S48': 'S48VelocityFlipReversal', 'S49': 'S49MarkovChainStateTransition', 'S50': 'S50BollingerSqueezeBreakout', 'S51': 'S51OrderBookImbalance',
+              'S52': 'S52LiquidityMomentum', 'S53': 'S53CoinbaseBookRtiAnticipation', 'S54': 'S54TickAccelerationSpreadCompression', 'S55': 'S55RapidProbabilityChangeChase',
+              'S56': 'S56WhaleWalletOnchainFrontrun', 'S57': 'S57EconomicReleasePrepositioning', 'S58': 'S58PostReleaseDriftContinuation', 'S59': 'S59BinanceBoundaryStopHuntFade',
+              'S60': 'S60ElonTweetBurstFilter', 'S61': 'S61SessionOnlyEngineRestriction', 'S62': 'S62NeuralEnsembleClassifier', 'S63': 'S63LlmFilteredTrendVeto',
+              'S64': 'S64MarkovRegimeSwitchedRouting', 'S65': 'S65AdaptiveSelfTuner', 'S66': 'S66SevenTriggerExitStack', 'S67': 'S67DynamicHedgeFlip',
+              'S68': 'S68PriceFieldStagedExits', 'S69': 'S69ComplementaryExitDiscipline', 'S70': 'S70FourChannelConfluence',
           }
           matrix = {'include': []}
           for name, pnl, n in chosen:
