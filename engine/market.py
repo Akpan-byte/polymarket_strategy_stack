@@ -29,10 +29,9 @@ class Market:
     rem_sec: np.ndarray
     elapsed_sec: np.ndarray
     delta_pct: np.ndarray
-    # Raw Level-2 orderbooks per snapshot (object arrays of dicts) so
-    # strategies can compute their own depth/pressure metrics.
-    orderbook_up: np.ndarray
-    orderbook_down: np.ndarray
+    # Source path so strategies can lazily re-read raw JSON (e.g. L2 books)
+    # without bloating the shared in-memory cache.
+    path: str
 
     def __len__(self) -> int:
         return self.ts.shape[0]
@@ -96,8 +95,6 @@ def load_market(path: str) -> Optional[Market]:
     best_bid_up = np.full(n, np.nan, dtype=np.float64)
     best_ask_down = np.full(n, np.nan, dtype=np.float64)
     best_bid_down = np.full(n, np.nan, dtype=np.float64)
-    orderbook_up = np.empty(n, dtype=object)
-    orderbook_down = np.empty(n, dtype=object)
 
     for i, row in enumerate(valid):
         ts[i] = _parse_ts(row.get("time"))
@@ -110,8 +107,6 @@ def load_market(path: str) -> Optional[Market]:
             price_down[i] = float(pd)
         ob_up = row.get("orderbook_up", {}) or {}
         ob_down = row.get("orderbook_down", {}) or {}
-        orderbook_up[i] = ob_up
-        orderbook_down[i] = ob_down
         best_ask_up[i] = _best_ask(ob_up)
         best_bid_up[i] = _best_bid(ob_up)
         best_ask_down[i] = _best_ask(ob_down)
@@ -144,8 +139,7 @@ def load_market(path: str) -> Optional[Market]:
         rem_sec=rem_sec,
         elapsed_sec=elapsed_sec,
         delta_pct=delta_pct,
-        orderbook_up=orderbook_up,
-        orderbook_down=orderbook_down,
+        path=str(path),
     )
 
 

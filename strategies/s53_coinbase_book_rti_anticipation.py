@@ -2,14 +2,36 @@
 Approximate directional book pressure from YES/NO token Level-2 orderbooks.
 Large bid wall below price favors UP; large ask wall above price favors DOWN.
 """
+import gzip
+import json
 import math
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import numpy as np
 
 from engine.backtest import Signal
 from engine.market import Market
 from strategies.base import Strategy
+
+
+def _load_orderbooks(path: str) -> Tuple[List[dict], List[dict]]:
+    """Lazy-load orderbooks for the snapshots kept by Market loader."""
+    try:
+        with gzip.open(path, "rt", encoding="utf-8") as f:
+            rows = json.load(f)
+    except Exception:
+        return [], []
+    obs_up: List[dict] = []
+    obs_down: List[dict] = []
+    for row in rows:
+        # Match Market.load_market filtering: valid timestamp + btc_price.
+        t = row.get("time")
+        px = row.get("btc_price")
+        if t is None or px is None:
+            continue
+        obs_up.append(row.get("orderbook_up", {}) or {})
+        obs_down.append(row.get("orderbook_down", {}) or {})
+    return obs_up, obs_down
 
 
 def _wall_mass(book: dict, side: str, center_price: float, band_pct: float, wall_mult: float) -> float:
@@ -86,6 +108,11 @@ class S53CoinbaseBookRtiAnticipation(Strategy):
         if n < p["warmup_ticks"] + p["max_hold_ticks"] + 5:
             return []
 
+        # Lazy-load orderbooks for this market only (keeps shared cache small).
+        obs_up, obs_down = _load_orderbooks(market.path)
+        if len(obs_up) != n or len(obs_down) != n:
+            return []
+
         # Pre-compress orderbook asymmetry for the whole market.
         # A_yes positive = bid wall below YES price > ask wall above it (UP pressure).
         # A_no positive = bid wall below NO price > ask wall above it (DOWN pressure).
@@ -103,19 +130,19 @@ class S53CoinbaseBookRtiAnticipation(Strategy):
             A_no = 0.0
             if not math.isnan(center_up) and center_up > 0:
                 bid_wall_up = _wall_mass(
-                    market.orderbook_up[idx], "bid", center_up, p["band_pct"], p["wall_mult"]
+                    obs_up[idx], "bid", center_up, p["band_pct"], p["wall_mult"]
                 )
                 ask_wall_up = _wall_mass(
-                    market.orderbook_up[idx], "ask", center_up, p["band_pct"], p["wall_mult"]
+                    obs_up[idx], "ask", center_up, p["band_pct"], p["wall_mult"]
                 )
                 A_yes = bid_wall_up - ask_wall_up
 
             if not math.isnan(center_down) and center_down > 0:
                 bid_wall_down = _wall_mass(
-                    market.orderbook_down[idx], "bid", center_down, p["band_pct"], p["wall_mult"]
+                    obs_down[idx], "bid", center_down, p["band_pct"], p["wall_mult"]
                 )
                 ask_wall_down = _wall_mass(
-                    market.orderbook_down[idx], "ask", center_down, p["band_pct"], p["wall_mult"]
+                    obs_down[idx], "ask", center_down, p["band_pct"], p["wall_mult"]
                 )
                 A_no = bid_wall_down - ask_wall_down
 
