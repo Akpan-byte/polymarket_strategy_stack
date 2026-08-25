@@ -366,9 +366,9 @@ jobs:
       - name: Sync to Google Drive
         run: |
           mkdir -p ~/.config/rclone
-          printf '%s\n' "$RCLONE_CONFIG" > ~/.config/rclone/rclone.conf
+          printf '%s\n' "$RCLONE_CONFIG_CONTENT" > ~/.config/rclone/rclone.conf
           "$HOME/.local/bin/rclone" sync artifacts polybacktest:results/gh_actions/${{ github.run_id }}
           "$HOME/.local/bin/rclone" copy FINAL_REPORT.md polybacktest:results/gh_actions/${{ github.run_id }}/
           "$HOME/.local/bin/rclone" copy summary.json polybacktest:results/gh_actions/${{ github.run_id }}/
         env:
-          RCLONE_CONFIG: ${{ secrets.RCLONE_CONFIG }}
+          RCLONE_CONFIG_CONTENT: ${{ secrets.RCLONE_CONFIG }}
