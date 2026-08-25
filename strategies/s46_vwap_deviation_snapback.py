@@ -15,19 +15,32 @@ from strategies.base import Strategy
 def _rolling_mean_std(
     ts: np.ndarray, prices: np.ndarray, window_sec: float
 ) -> Tuple[np.ndarray, np.ndarray]:
-    """Rolling (unweighted) mean and population std over a time window."""
+    """Rolling (unweighted) mean and population std over a time window.
+
+    Two-pointer O(n) implementation using cumulative sums.
+    """
     n = len(ts)
     mean = np.full(n, np.nan, dtype=np.float64)
     std = np.full(n, np.nan, dtype=np.float64)
+    cumsum = np.cumsum(prices, dtype=np.float64)
+    cumsum2 = np.cumsum(prices * prices, dtype=np.float64)
+    left = 0
     for i in range(n):
-        left = i
-        while left >= 0 and ts[i] - ts[left] <= window_sec:
-            left -= 1
-        left += 1
-        if left < i:
-            window = prices[left : i + 1]
-            mean[i] = float(np.mean(window))
-            std[i] = float(np.std(window))
+        while left < i and ts[i] - ts[left] > window_sec:
+            left += 1
+        k = i - left + 1
+        if k < 2:
+            # Single point: mean is defined, std is nan.
+            if k == 1:
+                mean[i] = float(prices[i])
+            continue
+        s = cumsum[i] - (cumsum[left - 1] if left > 0 else 0.0)
+        s2 = cumsum2[i] - (cumsum2[left - 1] if left > 0 else 0.0)
+        m = s / k
+        mean[i] = float(m)
+        # Population std.
+        variance = max(0.0, s2 / k - m * m)
+        std[i] = float(np.sqrt(variance))
     return mean, std
 
 
