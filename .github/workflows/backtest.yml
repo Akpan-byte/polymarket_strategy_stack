@@ -191,7 +191,8 @@ jobs:
           for label, m in metrics.items():
               if m.get('n', 0) < 5:
                   continue
-              parts = label.rsplit('_', 2)
+              # label = <strategy_name>_<sizing>; sizing has 3 tokens (e.g. s3_pctmin_150)
+              parts = label.rsplit('_', 3)
               name = parts[0]
               by_strat.setdefault(name, {'pnl': 0, 'n': 0})
               by_strat[name]['pnl'] += m.get('total_pnl', 0)
@@ -355,7 +356,13 @@ jobs:
             summary.json
             artifacts/**/sweep_summary.json
       - name: Install rclone
-        run: curl https://rclone.org/install.sh | bash
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSL https://downloads.rclone.org/rclone-current-linux-amd64.zip -o /tmp/rclone.zip
+          unzip -o /tmp/rclone.zip -d /tmp/rclone
+          cp /tmp/rclone/rclone-*-linux-amd64/rclone "$HOME/.local/bin/rclone"
+          chmod +x "$HOME/.local/bin/rclone"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Sync to Google Drive
         run: |
           mkdir -p ~/.config/rclone
