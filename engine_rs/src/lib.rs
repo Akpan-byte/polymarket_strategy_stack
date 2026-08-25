@@ -1,5 +1,4 @@
-use ndarray::{ArrayView1, s};
-use numpy::{PyArray1, PyReadonlyArray1};
+use numpy::PyReadonlyArray1;
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use serde::Deserialize;
@@ -52,15 +51,11 @@ fn taker_fee_per_share(price: f64, fee_multiplier: f64) -> f64 {
     }
 }
 
-fn is_nan(x: f64) -> bool {
-    x.is_nan()
-}
-
 /// Run one market's signals through the execution engine.
 #[pyfunction]
 #[allow(clippy::too_many_arguments)]
-fn run_market(
-    py: Python,
+fn run_market<'py>(
+    py: Python<'py>,
     market_id: &str,
     strategy: &str,
     sizing_json: &str,
@@ -70,40 +65,35 @@ fn run_market(
     strike: f64,
     resolution: &str,
     ts_arr: PyReadonlyArray1<f64>,
-    spot_arr: PyReadonlyArray1<f64>,
+    _spot_arr: PyReadonlyArray1<f64>,
     price_up_arr: PyReadonlyArray1<f64>,
     price_down_arr: PyReadonlyArray1<f64>,
     best_ask_up_arr: PyReadonlyArray1<f64>,
     best_bid_up_arr: PyReadonlyArray1<f64>,
     best_ask_down_arr: PyReadonlyArray1<f64>,
     best_bid_down_arr: PyReadonlyArray1<f64>,
-    rem_sec_arr: PyReadonlyArray1<f64>,
-    elapsed_sec_arr: PyReadonlyArray1<f64>,
-    delta_pct_arr: PyReadonlyArray1<f64>,
+    _rem_sec_arr: PyReadonlyArray1<f64>,
+    _elapsed_sec_arr: PyReadonlyArray1<f64>,
+    _delta_pct_arr: PyReadonlyArray1<f64>,
     signals: Vec<(String, usize, Option<usize>)>,
-) -> PyResult<Vec<PyObject>> {
+) -> PyResult<Vec<Bound<'py, PyDict>>> {
     let sizing: SizingConfig = serde_json::from_str(sizing_json)
         .map_err(|e| PyErr::new::<pyo3::exceptions::PyValueError, _>(format!("bad sizing json: {e}")))?;
 
-    let n = ts_arr.len();
+    let n = ts_arr.shape()[0];
     if n == 0 {
         return Ok(Vec::new());
     }
 
-    // Convert to ndarray views; numpy guarantees 1-D f64 arrays.
     let ts = ts_arr.as_array();
-    let _spot = spot_arr.as_array();
     let price_up = price_up_arr.as_array();
     let price_down = price_down_arr.as_array();
     let best_ask_up = best_ask_up_arr.as_array();
     let best_bid_up = best_bid_up_arr.as_array();
     let best_ask_down = best_ask_down_arr.as_array();
     let best_bid_down = best_bid_down_arr.as_array();
-    let _rem_sec = rem_sec_arr.as_array();
-    let _elapsed_sec = elapsed_sec_arr.as_array();
-    let _delta_pct = delta_pct_arr.as_array();
 
-    let mut trades: Vec<PyObject> = Vec::with_capacity(signals.len());
+    let mut trades: Vec<Bound<'py, PyDict>> = Vec::with_capacity(signals.len());
     let mut balance = initial_balance;
 
     for (side, entry_idx, exit_idx_opt) in signals {
@@ -115,7 +105,7 @@ fn run_market(
         } else {
             best_ask_down[entry_idx]
         };
-        if is_nan(entry_price) || entry_price <= 0.0 || entry_price >= 1.0 {
+        if entry_price.is_nan() || entry_price <= 0.0 || entry_price >= 1.0 {
             continue;
         }
 
@@ -139,9 +129,9 @@ fn run_market(
             } else {
                 best_bid_down[eidx]
             };
-            if is_nan(ep) {
+            if ep.is_nan() {
                 ep = if side == "YES" { price_up[eidx] } else { price_down[eidx] };
-                if is_nan(ep) {
+                if ep.is_nan() {
                     ep = if resolution == side { 1.0 } else { 0.0 };
                 }
             }
@@ -167,7 +157,7 @@ fn run_market(
         dict.set_item("fee_paid", entry_fee)?;
         dict.set_item("pnl", pnl)?;
         dict.set_item("reason", "rust_engine")?;
-        trades.push(dict.into_py(py));
+        trades.push(dict);
 
         if balance <= 0.0 {
             break;
@@ -177,38 +167,8 @@ fn run_market(
     Ok(trades)
 }
 
-/// A thin helper to stream a batch of trades directly to a CSV file.
-/// Returns number of trades written.
-#[pyfunction]
-fn append_trades_csv(path: &str, trades: Vec<&Bound<'_, PyDict>>) -> PyResult<usize> {
-    use std::fs::OpenOptions;
-    let file = OpenOptions::new()
-        .create(true)
-        .append(true)
-        .open(path)?;
-    let mut wtr = csv::Writer::from_writer(file);
-    for trade in trades {
-        wtr.write_record(&[
-            trade.get_item("market_id").unwrap().unwrap().extract::<String>().unwrap_or_default(),
-            trade.get_item("strategy").unwrap().unwrap().extract::<String>().unwrap_or_default(),
-            trade.get_item("side").unwrap().unwrap().extract::<String>().unwrap_or_default(),
-            trade.get_item("entry_time").unwrap().unwrap().extract::<f64>().unwrap_or_default().to_string(),
-            trade.get_item("entry_price").unwrap().unwrap().extract::<f64>().unwrap_or_default().to_string(),
-            trade.get_item("shares").unwrap().unwrap().extract::<i64>().unwrap_or_default().to_string(),
-            trade.get_item("exit_time").unwrap().unwrap().extract::<f64>().unwrap_or_default().to_string(),
-            trade.get_item("exit_price").unwrap().unwrap().extract::<f64>().unwrap_or_default().to_string(),
-            trade.get_item("fee_paid").unwrap().unwrap().extract::<f64>().unwrap_or_default().to_string(),
-            trade.get_item("pnl").unwrap().unwrap().extract::<f64>().unwrap_or_default().to_string(),
-            trade.get_item("reason").unwrap().unwrap().extract::<String>().unwrap_or_default(),
-        ])?;
-    }
-    wtr.flush()?;
-    Ok(trades.len())
-}
-
 #[pymodule]
 fn polybacktest_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(run_market, m)?)?;
-    m.add_function(wrap_pyfunction!(append_trades_csv, m)?)?;
     Ok(())
 }
