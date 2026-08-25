@@ -1,4 +1,4 @@
-use numpy::PyReadonlyArray1;
+use numpy::{PyReadonlyArray1, PyUntypedArrayMethods};
 use pyo3::prelude::*;
 use pyo3::types::PyDict;
 use serde::Deserialize;
