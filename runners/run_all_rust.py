@@ -123,14 +123,16 @@ def main():
     parser.add_argument("--sizings", default="s1_fixed_200,s2_pctmin_200,s3_pctmin_150")
     parser.add_argument("--out-dir", default="results_rust")
     parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--max-files", type=int, default=0)
     args = parser.parse_args()
 
     strategies = discover_strategies(args.strategies_dir)
     print(f"Discovered {len(strategies)} strategies")
 
+    max_files = args.max_files or None
     if args.cache and not os.path.exists(args.cache):
         print("Building cache...")
-        markets = load_markets(args.data)
+        markets = load_markets(args.data, max_files=max_files)
         cache_markets(markets, args.cache)
         print(f"Cached {len(markets)} markets")
 
@@ -141,7 +143,7 @@ def main():
         print(f"Loaded {len(_MARKETS)} markets from cache")
     elif not args.cache:
         print("Loading markets...")
-        _MARKETS = load_markets(args.data)
+        _MARKETS = load_markets(args.data, max_files=max_files)
         print(f"Loaded {len(_MARKETS)} markets")
 
     sizings = [s.strip() for s in args.sizings.split(",")]
