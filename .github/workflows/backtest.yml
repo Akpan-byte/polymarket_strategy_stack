@@ -233,7 +233,7 @@ jobs:
   sweep:
     needs: aggregate
     runs-on: ubuntu-latest
-    if: needs.aggregate.outputs.sweep_matrix != '' && needs.aggregate.outputs.sweep_matrix != '{"include": []}'
+    if: 'needs.aggregate.outputs.sweep_matrix != '''' && needs.aggregate.outputs.sweep_matrix != ''{"include": []}'''
     strategy:
       fail-fast: false
       max-parallel: 20
@@ -313,4 +313,3 @@ jobs:
           rclone copy summary.json polybacktest:results/gh_actions/${{ github.run_id }}/
         env:
           RCLONE_CONFIG: ${{ secrets.RCLONE_CONFIG }}
-# triggered 
