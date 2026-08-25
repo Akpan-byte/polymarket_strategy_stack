@@ -64,7 +64,7 @@ class S44BollingerStochRsiDoubleExtreme(Strategy):
         upper = mean + p["bb_std"] * std
         lower = mean - p["bb_std"] * std
 
-        # RSI on spot returns.
+        # RSI on spot returns (vectorized rolling sums).
         diffs = np.diff(spot)
         gains = np.maximum(diffs, 0.0)
         losses = -np.minimum(diffs, 0.0)
@@ -72,31 +72,29 @@ class S44BollingerStochRsiDoubleExtreme(Strategy):
         cum_loss = np.cumsum(losses)
         rw = p["rsi_window"]
         rsi = np.full(n, np.nan)
-        for idx in range(rw + 1, n):
-            g = cum_gain[idx - 1] - (cum_gain[idx - rw - 1] if idx - rw - 1 >= 0 else 0.0)
-            l = cum_loss[idx - 1] - (cum_loss[idx - rw - 1] if idx - rw - 1 >= 0 else 0.0)
-            avg_g = g / rw
-            avg_l = l / rw
-            if avg_l <= 1e-12:
-                rsi[idx] = 100.0 if avg_g > 1e-12 else 50.0
-            else:
-                rs = avg_g / avg_l
-                rsi[idx] = 100.0 - 100.0 / (1.0 + rs)
+        g_window = cum_gain[rw:] - cum_gain[:-rw]
+        l_window = cum_loss[rw:] - cum_loss[:-rw]
+        avg_g = g_window / rw
+        avg_l = l_window / rw
+        rs = np.where(avg_l > 1e-12, avg_g / avg_l, np.where(avg_g > 1e-12, np.inf, 1.0))
+        rsi[rw + 1 :] = np.where(np.isinf(rs), 100.0, 100.0 - 100.0 / (1.0 + rs))
 
         # Stochastic RSI: (RSI - min RSI) / (max RSI - min RSI) * 100.
         sw = p["stoch_window"]
         stoch_raw = np.full(n, np.nan)
-        for idx in range(min_idx, n):
-            window = rsi[idx - sw + 1: idx + 1]
-            if np.any(np.isnan(window)):
-                continue
-            rmin = np.min(window)
-            rmax = np.max(window)
+        if n >= sw:
+            from numpy.lib.stride_tricks import sliding_window_view
+            rsi_slices = sliding_window_view(rsi, sw)
+            rmin = np.min(rsi_slices, axis=1)
+            rmax = np.max(rsi_slices, axis=1)
             denom = rmax - rmin
-            if denom <= 1e-12:
-                stoch_raw[idx] = 50.0
-            else:
-                stoch_raw[idx] = 100.0 * (rsi[idx] - rmin) / denom
+            cur = rsi[sw - 1 :]
+            stoch_vals = np.where(
+                denom <= 1e-12,
+                50.0,
+                100.0 * (cur - rmin) / denom,
+            )
+            stoch_raw[sw - 1 :] = stoch_vals
 
         # %K = SMA(stoch_raw, k_period); %D = SMA(%K, d_period).
         kp = p["k_period"]

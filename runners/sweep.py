@@ -33,9 +33,17 @@ def _param_label(params: dict) -> str:
         v = params[k]
         if isinstance(v, float):
             parts.append(f"{k}{v:.4f}")
+        elif isinstance(v, dict):
+            # Serialize dict compactly without special characters.
+            items = sorted(v.items())
+            parts.append(f"{k}" + "-".join(f"{kk}{vv}" for kk, vv in items))
         else:
             parts.append(f"{k}{v}")
-    return "_".join(parts)[:120]
+    label = "_".join(parts)
+    # Sanitize characters disallowed in artifact paths across file systems.
+    for ch in ['"', ':', '<', '>', '|', '*', '?', '\\', '/', '\n', '\r', ' ']:
+        label = label.replace(ch, "")
+    return label[:120]
 
 
 def run_one(args_tuple):
