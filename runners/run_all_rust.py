@@ -21,7 +21,7 @@ from engine.sizing import DEFAULT_SIZINGS
 
 def discover_strategies(strategies_dir: str) -> List[Tuple[str, str]]:
     out: List[Tuple[str, str]] = []
-    p = Path(strategies_dir))
+    p = Path(strategies_dir)
     for fp in sorted(p.glob("s*.py")):
         text = fp.read_text()
         for line in text.splitlines():
