@@ -67,13 +67,16 @@ class S50BollingerSqueezeBreakout(Strategy):
         spot = market.spot
         mean, upper, lower, bandwidth = self._bollinger_bands(spot, w, p["bb_std"])
 
-        # Trailing bandwidth percentile
+        # Trailing bandwidth percentile (vectorized rolling window).
         bw_window = p["bandwidth_window"]
         bw_pctile = p["bandwidth_pctile"]
         bw_threshold = np.full(n, np.nan)
-        for idx in range(w + bw_window, n):
-            slice_ = bandwidth[idx - bw_window:idx]
-            bw_threshold[idx] = np.nanpercentile(slice_, bw_pctile)
+        if n >= w + bw_window:
+            from numpy.lib.stride_tricks import sliding_window_view
+            bw_slices = sliding_window_view(bandwidth, bw_window)
+            # Align so threshold[idx] uses bandwidth[idx-bw_window+1 : idx+1]
+            bw_vals = np.nanpercentile(bw_slices, bw_pctile, axis=1)
+            bw_threshold[w + bw_window - 1 :] = bw_vals[w + bw_window - 1 - bw_window + 1 :]
 
         # Spot velocity (absolute move over lookback) and trailing mean of prior bars
         vl = p["velocity_lookback"]
@@ -81,8 +84,9 @@ class S50BollingerSqueezeBreakout(Strategy):
         velocity[vl:] = np.abs(spot[vl:] - spot[:-vl])
         vw = p["velocity_window"]
         mean_velocity = np.full(n, np.nan)
-        for idx in range(vl + vw, n):
-            mean_velocity[idx] = np.nanmean(velocity[idx - vw:idx])
+        if n >= vl + vw:
+            vel_slices = sliding_window_view(velocity, vw)
+            mean_velocity[vl + vw - 1 :] = np.nanmean(vel_slices[vl + vw - 1 - vw + 1 :], axis=1)
 
         # Bar duration for squeeze timeout (seconds per bar)
         sec_per_bar = np.median(np.diff(market.ts))

@@ -55,11 +55,26 @@ class S54TickAccelerationSpreadCompression(Strategy):
 
         # Expected move proxy: largest |delta_pct| observed over the rolling window.
         expected_move = np.full(n, np.nan)
-        for idx in range(1, n):
-            start = max(0, idx - w + 1)
-            seg = delta[start : idx + 1]
-            if len(seg) >= 2:
-                expected_move[idx] = float(np.max(np.abs(seg)))
+        if n >= w:
+            from numpy.lib.stride_tricks import sliding_window_view
+            abs_delta = np.abs(delta)
+            em_slices = sliding_window_view(abs_delta, w)
+            # expected_move[idx] uses delta[idx-w+1 : idx+1]
+            expected_move[w - 1 :] = np.max(em_slices, axis=1)
+
+        # Pre-compute rolling spread percentiles for both sides.
+        from numpy.lib.stride_tricks import sliding_window_view
+        def _rolling_pctile(arr, window, pct):
+            out = np.full(n, np.nan)
+            if n >= window:
+                slices = sliding_window_view(arr, window)
+                out[window - 1 :] = np.percentile(slices, pct * 100, axis=1)
+            return out
+
+        comp_up = _rolling_pctile(spread_up, w, p["spread_compress_pct"])
+        cancel_up = _rolling_pctile(spread_up, w, p["spread_cancel_pct"])
+        comp_down = _rolling_pctile(spread_down, w, p["spread_compress_pct"])
+        cancel_down = _rolling_pctile(spread_down, w, p["spread_cancel_pct"])
 
         armed = False
         side = None
@@ -67,18 +82,17 @@ class S54TickAccelerationSpreadCompression(Strategy):
         for idx in range(max(w, rise), n - 10):
             # Default side from current delta sign.
             cur_side = "YES" if delta[idx] > 0 else "NO"
-            spread = spread_up if cur_side == "YES" else spread_down
+            if cur_side == "YES":
+                spread = spread_up
+                p_compress = comp_up[idx]
+                p_cancel = cancel_up[idx]
+            else:
+                spread = spread_down
+                p_compress = comp_down[idx]
+                p_cancel = cancel_down[idx]
             cur_spread = float(spread[idx])
-            if np.isnan(cur_spread):
+            if np.isnan(cur_spread) or np.isnan(p_compress) or np.isnan(p_cancel):
                 continue
-
-            # Rolling percentile window up to and including idx.
-            start = max(0, idx - w + 1)
-            hist = spread[start : idx + 1]
-            if len(hist) < 2:
-                continue
-            p_compress = float(np.percentile(hist, p["spread_compress_pct"] * 100))
-            p_cancel = float(np.percentile(hist, p["spread_cancel_pct"] * 100))
 
             ad = abs(delta[idx])
 
