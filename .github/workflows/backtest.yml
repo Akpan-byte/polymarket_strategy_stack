@@ -28,23 +28,26 @@ jobs:
           python-version: '3.12'
       - name: Install deps
         run: pip install numpy pandas
-      - name: Download IS data tarball
+      - name: Install rclone
         run: |
-          mkdir -p data
-          gh release download "${{ github.event.inputs.data_release || 'data-v1' }}" \
-            --repo "${{ github.repository }}" \
-            --pattern "is_data.tar.gz" \
-            --dir data || true
-          if [ ! -f data/is_data.tar.gz ]; then
-            echo "Data tarball not found. Please create release ${{ github.event.inputs.data_release || 'data-v1' }} with asset is_data.tar.gz"
-            exit 1
-          fi
-          mkdir -p "$DATA_DIR"
-          tar xzf data/is_data.tar.gz -C "$DATA_DIR"
-          echo "Data files:"
-          ls -l "$DATA_DIR" | head
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSL https://downloads.rclone.org/rclone-current-linux-amd64.zip -o /tmp/rclone.zip
+          unzip -o /tmp/rclone.zip -d /tmp/rclone
+          cp /tmp/rclone/rclone-*-linux-amd64/rclone "$HOME/.local/bin/rclone"
+          chmod +x "$HOME/.local/bin/rclone"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Write rclone config
+        run: |
+          mkdir -p ~/.config/rclone
+          printf '%s\n' "$RCLONE_CONFIG_CONTENT" > ~/.config/rclone/rclone.conf
         env:
-          GH_TOKEN: ${{ github.token }}
+          RCLONE_CONFIG_CONTENT: ${{ secrets.RCLONE_CONFIG }}
+      - name: Download IS data from Google Drive
+        run: |
+          mkdir -p "$DATA_DIR"
+          rclone copy akpanbrain:polybacktest_60d/polymarket/btc/5m/ "$DATA_DIR" --include "2[0-9]*.json.gz" --transfers 16 --checkers 32 --progress
+          echo "Data files:"
+          ls "$DATA_DIR" | wc -l
       - name: Build cache
         run: |
           python3 - <<'PY'
