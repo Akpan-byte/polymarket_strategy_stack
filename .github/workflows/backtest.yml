@@ -56,10 +56,14 @@ jobs:
           printf '%s\n' "$RCLONE_CONFIG_CONTENT" > ~/.config/rclone/rclone.conf
         env:
           RCLONE_CONFIG_CONTENT: ${{ secrets.RCLONE_CONFIG }}
+      - name: Verify rclone remotes
+        run: |
+          "$HOME/.local/bin/rclone" listremotes
+          "$HOME/.local/bin/rclone" size polybacktest:polybacktest_60d/polymarket/btc/5m/ --include "2[0-9]*.json.gz" || true
       - name: Download IS data from Google Drive
         run: |
           mkdir -p "$DATA_DIR"
-          rclone copy akpanbrain:polybacktest_60d/polymarket/btc/5m/ "$DATA_DIR" --include "2[0-9]*.json.gz" --transfers 16 --checkers 32 --progress
+          "$HOME/.local/bin/rclone" copy polybacktest:polybacktest_60d/polymarket/btc/5m/ "$DATA_DIR" --include "2[0-9]*.json.gz" --transfers 16 --checkers 32 --progress
           echo "Data files:"
           ls "$DATA_DIR" | wc -l
       - name: Build cache
