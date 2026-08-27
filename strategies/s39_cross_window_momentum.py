@@ -56,7 +56,7 @@ class S39CrossWindowMomentum(Strategy):
                 continue
             if np.sign(short_vel) != np.sign(long_vel):
                 continue
-            if np.sign(short_vel) != np.sign(d):
+            if np.sign(short_vel) != (np.sign(d) if side == 'YES' else -np.sign(d)):
                 continue
 
             # Continuation filter: short momentum not fading vs long momentum.

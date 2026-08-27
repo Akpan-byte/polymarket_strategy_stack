@@ -74,7 +74,7 @@ class S52LiquidityMomentum(Strategy):
             window_infl = float(np.sum(infl[idx - w + 1:idx + 1]))
 
             # Confirm direction: influence and spot delta agree.
-            if np.sign(window_infl) != np.sign(d):
+            if np.sign(window_infl) != (np.sign(d) if side == 'YES' else -np.sign(d)):
                 continue
             if abs(window_infl) < 1e-9:
                 continue

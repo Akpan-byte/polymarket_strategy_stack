@@ -43,7 +43,7 @@ class S32MomentumMode(Strategy):
             if np.isnan(window).any():
                 continue
             vel = float(window[-1] - window[0])
-            if abs(vel) < p["min_vel"] or np.sign(vel) != np.sign(d):
+            if abs(vel) < p["min_vel"] or np.sign(vel) != (np.sign(d) if side == 'YES' else -np.sign(d)):
                 continue
 
             # Sustained directional ticks: most recent sustain_ticks moves agree.

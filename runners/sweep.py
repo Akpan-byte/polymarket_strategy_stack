@@ -28,6 +28,18 @@ def import_strategy(module_path: str, class_name: str):
     return getattr(mod, class_name)
 
 
+def detect_strategy_class(module_path: str) -> str:
+    """Auto-detect the concrete strategy class in a file."""
+    spec = importlib.util.spec_from_file_location("mod", module_path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    for n in dir(mod):
+        o = getattr(mod, n)
+        if isinstance(o, type) and n.startswith("S") and "Strategy" not in n:
+            return n
+    raise ValueError(f"No strategy class found in {module_path}")
+
+
 def _signal_to_tuple(sig: Signal, shares: int = 0):
     return (
         sig.side,
@@ -158,13 +170,21 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", required=True)
     parser.add_argument("--cache", default="")
-    parser.add_argument("--strategy-module", required=True)
-    parser.add_argument("--strategy-class", required=True)
-    parser.add_argument("--sizings", default="s1_fixed_200,s2_pctmin_200,s3_pctmin_150")
+    parser.add_argument("--strategy-module", default="")
+    parser.add_argument("--strategy-class", default="")
+    parser.add_argument("--strategy-file", default="", help="Path to strategy module (auto-detects class)")
+    parser.add_argument("--sizings", default="s3_pctmin_150")
     parser.add_argument("--out-dir", default="results_sweep")
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--max-combos", type=int, default=0, help="Limit total combos per sizing")
     args = parser.parse_args()
+
+    if args.strategy_file:
+        args.strategy_module = args.strategy_file
+        args.strategy_class = detect_strategy_class(args.strategy_file)
+        print(f"Auto-detected class {args.strategy_class} from {args.strategy_file}")
+    if not args.strategy_module or not args.strategy_class:
+        parser.error("Provide --strategy-file or both --strategy-module and --strategy-class")
 
     cls = import_strategy(args.strategy_module, args.strategy_class)
     sizings = [s.strip() for s in args.sizings.split(",")]

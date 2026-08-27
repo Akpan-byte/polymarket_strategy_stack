@@ -43,7 +43,7 @@ class S31AlignedMode(Strategy):
             vel = float(window[-1] - window[0])
             if abs(vel) < p["min_vel"]:
                 continue
-            if np.sign(vel) != np.sign(d):
+            if np.sign(vel) != (np.sign(d) if side == 'YES' else -np.sign(d)):
                 continue
 
             ask = market.best_ask_up[idx] if side == "YES" else market.best_ask_down[idx]

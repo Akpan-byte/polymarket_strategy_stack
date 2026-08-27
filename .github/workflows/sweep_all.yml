@@ -1,0 +1,280 @@
+name: Comprehensive Strategy Sweep (All Strategies, Full Grids)
+
+on:
+  workflow_dispatch:
+    inputs:
+      data_release:
+        description: 'GitHub release tag containing IS data tarball'
+        required: true
+        default: 'data-v1'
+      sizing:
+        description: 'Sizing key to use for sweep optimization'
+        required: true
+        default: 's3_pctmin_150'
+      max_combos:
+        description: 'Max combos per strategy (0 = full grid)'
+        required: true
+        default: '0'
+      workers:
+        description: 'Workers per sweep job'
+        required: true
+        default: '4'
+
+env:
+  DATA_DIR: data/btc_5m_is
+  CACHE_PATH: cache/markets.pkl
+
+jobs:
+  setup-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install numpy pandas maturin
+      - name: Install Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+      - name: Build Rust extension
+        run: |
+          cd engine_rs
+          maturin build --release
+          ls -la target/wheels/
+      - name: Upload Rust wheel
+        uses: actions/upload-artifact@v4
+        with:
+          name: rust-wheel
+          path: engine_rs/target/wheels/*.whl
+      - name: Install rclone
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSL https://downloads.rclone.org/rclone-current-linux-amd64.zip -o /tmp/rclone.zip
+          unzip -o /tmp/rclone.zip -d /tmp/rclone
+          cp /tmp/rclone/rclone-*-linux-amd64/rclone "$HOME/.local/bin/rclone"
+          chmod +x "$HOME/.local/bin/rclone"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Write rclone config
+        run: |
+          mkdir -p ~/.config/rclone
+          printf '%s\n' "$RCLONE_CONFIG_CONTENT" > ~/.config/rclone/rclone.conf
+        env:
+          RCLONE_CONFIG_CONTENT: ${{ secrets.RCLONE_CONFIG }}
+      - name: Restore markets cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.CACHE_PATH }}
+          key: markets-btc5m-is
+          restore-keys: |
+            markets-btc5m-
+      - name: Download IS data from GitHub release
+        run: |
+          mkdir -p "$DATA_DIR"
+          gh release download "${{ github.event.inputs.data_release }}" --repo "$GITHUB_REPOSITORY" --pattern "is_data.tar.gz" --dir /tmp
+          tar -xzf /tmp/is_data.tar.gz -C "$DATA_DIR" --strip-components=1
+          echo "Data files: $(ls "$DATA_DIR" | wc -l)"
+      - name: Build cache
+        run: |
+          python3 - <<'PY'
+          import os, sys
+          sys.path.insert(0, os.getcwd())
+          from engine.market import load_markets, cache_markets
+          markets = load_markets(os.environ['DATA_DIR'], workers=4)
+          print(f"Loaded {len(markets)} markets")
+          cache_markets(markets, os.environ['CACHE_PATH'])
+          PY
+      - name: Cache markets
+        uses: actions/cache/save@v4
+        with:
+          path: cache/markets.pkl
+          key: markets-btc5m-is
+
+  sweep:
+    needs: setup-data
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        strategy_file:
+          - s21_window_delta_purist.py
+          - s22_endcycle_threshold.py
+          - s23_dual_oracle_winner.py
+          - s24_twap_reversal.py
+          - s25_momentum_snipe_hedge.py
+          - s29_time_decay_extremity.py
+          - s31_aligned_mode.py
+          - s32_momentum_mode.py
+          - s33_macd_rsi_vwap.py
+          - s35_five_minute_lead.py
+          - s38_sticky_lagging_market_convergence.py
+          - s39_cross_window_momentum.py
+          - s40_cascade_trailing_logic.py
+          - s41_post_shakeout_reversal.py
+          - s42_first_60s_fakeout_fade.py
+          - s43_bollinger_rsi_reversal.py
+          - s44_bollinger_stoch_rsi_double_extreme.py
+          - s45_ema_rsi_stoch_triple_confirmation.py
+          - s46_vwap_deviation_snapback.py
+          - s47_spot_rebound_lag_reversion.py
+          - s48_velocity_flip_reversal.py
+          - s49_markov_chain_state_transition.py
+          - s50_bollinger_squeeze_breakout.py
+          - s51_ob_imbalance.py
+          - s52_liquidity_momentum.py
+          - s53_coinbase_book_rti_anticipation.py
+          - s54_tick_acceleration_spread_compression.py
+          - s55_rapid_probability_change_chase.py
+          - s56_whale_wallet_onchain_frontrun.py
+          - s57_economic_release_prepositioning.py
+          - s58_post_release_drift_continuation.py
+          - s59_binance_boundary_stop_hunt_fade.py
+          - s60_elon_tweet_burst_filter.py
+          - s61_session_only_engine_restriction.py
+          - s62_neural_ensemble_classifier.py
+          - s63_llm_filtered_trend_veto.py
+          - s64_markov_regime_switched_routing.py
+          - s65_adaptive_self_tuner.py
+          - s66_seven_trigger_exit_stack.py
+          - s67_dynamic_hedge_flip.py
+          - s68_price_field_staged_exits.py
+          - s69_complementary_exit_discipline.py
+          - s70_four_channel_confluence.py
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install numpy pandas
+      - name: Download Rust wheel
+        uses: actions/download-artifact@v4
+        with:
+          name: rust-wheel
+          path: rust_wheel
+      - name: Install Rust extension
+        run: pip install rust_wheel/*.whl
+      - name: Restore cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.CACHE_PATH }}
+          key: markets-btc5m-is
+          restore-keys: |
+            markets-btc5m-
+          fail-on-cache-miss: false
+      - name: Sweep strategy full grid
+        run: |
+          python3 runners/sweep.py --data "$DATA_DIR" --cache "$CACHE_PATH" \
+            --strategy-file "strategies/${{ matrix.strategy_file }}" \
+            --sizings "${{ github.event.inputs.sizing }}" \
+            --out-dir "sweeps/${{ matrix.strategy_file }}" \
+            --workers ${{ github.event.inputs.workers }} \
+            --max-combos ${{ github.event.inputs.max_combos }}
+      - name: Upload sweep results
+        uses: actions/upload-artifact@v4
+        with:
+          name: sweep-${{ matrix.strategy_file }}
+          path: sweeps/${{ matrix.strategy_file }}/
+          if-no-files-found: ignore
+
+  aggregate:
+    needs: sweep
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install numpy pandas
+      - name: Download all sweep artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: sweep-*
+      - name: Aggregate sweep summaries
+        run: |
+          python3 - <<'PY'
+          import json, glob, os
+          from pathlib import Path
+          all_results = []
+          for f in glob.glob('artifacts/sweep-*/sweep_summary.json', recursive=True):
+              with open(f) as fh:
+                  data = json.load(fh)
+              all_results.extend(data)
+          # Sort by total_pnl
+          all_results.sort(key=lambda x: x.get('metrics', {}).get('total_pnl', -float('inf')), reverse=True)
+          os.makedirs('aggregated', exist_ok=True)
+          with open('aggregated/sweep_all_summary.json', 'w') as fh:
+              json.dump(all_results, fh, indent=2, default=str)
+          print(f"Aggregated {len(all_results)} sweep results")
+          if all_results:
+              top = all_results[0]
+              print(f"Top: {top['label']} PnL=${top['metrics'].get('total_pnl',0):.2f} n={top['metrics'].get('n',0)}")
+          PY
+      - name: Upload aggregated sweep summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: sweep-all-summary
+          path: aggregated/sweep_all_summary.json
+      - name: Sync sweeps to Google Drive
+        run: |
+          mkdir -p ~/.config/rclone
+          printf '%s\n' "$RCLONE_CONFIG_CONTENT" > ~/.config/rclone/rclone.conf
+          "$HOME/.local/bin/rclone" sync artifacts polybacktest:results/gh_actions/${{ github.run_id }}-sweep-all
+          "$HOME/.local/bin/rclone" copy aggregated/sweep_all_summary.json polybacktest:results/gh_actions/${{ github.run_id }}-sweep-all/
+        env:
+          RCLONE_CONFIG_CONTENT: ${{ secrets.RCLONE_CONFIG }}
+
+  bestparams:
+    needs: [setup-data, aggregate]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install numpy pandas
+      - name: Download Rust wheel
+        uses: actions/download-artifact@v4
+        with:
+          name: rust-wheel
+          path: rust_wheel
+      - name: Install Rust extension
+        run: pip install rust_wheel/*.whl
+      - name: Restore cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.CACHE_PATH }}
+          key: markets-btc5m-is
+          restore-keys: |
+            markets-btc5m-
+          fail-on-cache-miss: false
+      - name: Download sweep summary
+        uses: actions/download-artifact@v4
+        with:
+          name: sweep-all-summary
+          path: aggregated
+      - name: Run best params across all sizings
+        run: |
+          python3 runners/run_best_params.py \
+            --sweep-summary aggregated/sweep_all_summary.json \
+            --data "$DATA_DIR" --cache "$CACHE_PATH" \
+            --sizings "s1_fixed_200,s2_pctmin_200,s3_pctmin_150,s4_kelly_quarter_200" \
+            --out-dir results_bestparams \
+            --workers 8
+      - name: Upload bestparams results
+        uses: actions/upload-artifact@v4
+        with:
+          name: bestparams-results
+          path: results_bestparams/
+      - name: Sync bestparams to Google Drive
+        run: |
+          mkdir -p ~/.config/rclone
+          printf '%s\n' "$RCLONE_CONFIG_CONTENT" > ~/.config/rclone/rclone.conf
+          "$HOME/.local/bin/rclone" sync results_bestparams polybacktest:results/gh_actions/${{ github.run_id }}-sweep-all/bestparams/
+        env:
+          RCLONE_CONFIG_CONTENT: ${{ secrets.RCLONE_CONFIG }}

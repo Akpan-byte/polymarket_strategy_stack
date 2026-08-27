@@ -69,7 +69,7 @@ class S69ComplementaryExitDiscipline(Strategy):
             if np.isnan(prices[idx]) or np.isnan(prices[idx - tw]):
                 continue
             trend = float(prices[idx] - prices[idx - tw])
-            if np.sign(trend) != np.sign(d):
+            if np.sign(trend) != (np.sign(d) if side == 'YES' else -np.sign(d)):
                 continue
 
             ask = market.best_ask_up[idx] if side == "YES" else market.best_ask_down[idx]

@@ -63,7 +63,7 @@ class S55RapidProbabilityChangeChase(Strategy):
             # Alert: fast move >= alert_thresh in chase_window.
             if abs(change) < p["alert_thresh"]:
                 continue
-            if np.sign(change) != np.sign(d):
+            if np.sign(change) != (np.sign(d) if side == 'YES' else -np.sign(d)):
                 continue
 
             # Only chase the early leg: current price within origin_slop of origin.
