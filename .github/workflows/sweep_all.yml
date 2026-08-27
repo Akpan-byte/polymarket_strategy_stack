@@ -189,6 +189,14 @@ jobs:
           python-version: '3.12'
       - name: Install deps
         run: pip install numpy pandas
+      - name: Install rclone
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSL https://downloads.rclone.org/rclone-current-linux-amd64.zip -o /tmp/rclone.zip
+          unzip -o /tmp/rclone.zip -d /tmp/rclone
+          cp /tmp/rclone/rclone-*-linux-amd64/rclone "$HOME/.local/bin/rclone"
+          chmod +x "$HOME/.local/bin/rclone"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Download all sweep artifacts
         uses: actions/download-artifact@v4
         with:
@@ -238,6 +246,14 @@ jobs:
           python-version: '3.12'
       - name: Install deps
         run: pip install numpy pandas
+      - name: Install rclone
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSL https://downloads.rclone.org/rclone-current-linux-amd64.zip -o /tmp/rclone.zip
+          unzip -o /tmp/rclone.zip -d /tmp/rclone
+          cp /tmp/rclone/rclone-*-linux-amd64/rclone "$HOME/.local/bin/rclone"
+          chmod +x "$HOME/.local/bin/rclone"
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
       - name: Download Rust wheel
         uses: actions/download-artifact@v4
         with:
