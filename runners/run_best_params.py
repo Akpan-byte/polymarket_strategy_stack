@@ -16,6 +16,8 @@ from engine.market import load_cached_markets, load_markets, cache_markets
 from engine.metrics import compute_metrics, save_metrics, save_trades
 from engine.sizing import DEFAULT_SIZINGS
 
+SIZING_KEYS = set(DEFAULT_SIZINGS.keys())
+
 _MARKETS = None
 
 
@@ -109,16 +111,16 @@ def main():
     with open(args.sweep_summary) as f:
         all_results = json.load(f)
 
-    # Group by strategy name (strip sizing suffix from label)
+    # Group by strategy name (strip sizing suffix + param label from label)
     by_strategy: Dict[str, List[dict]] = {}
     for r in all_results:
         label = r.get("label", "")
-        # label format: <strategy_name>_<sizing>_<paramlabel>
-        parts = label.split("_")
-        if len(parts) >= 2 and parts[-2].startswith("s") and parts[-1] in ["200", "150"]:
-            name = "_".join(parts[:-2])
-        else:
-            name = parts[0]
+        name = label
+        # label format: <strategy_name>_<sizing_key>_<paramlabel>
+        for sk in sorted(SIZING_KEYS, key=lambda x: -len(x)):
+            if f"_{sk}_" in label:
+                name = label.split(f"_{sk}_")[0]
+                break
         by_strategy.setdefault(name, []).append(r)
 
     # Pick best params per strategy
