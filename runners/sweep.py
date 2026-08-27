@@ -16,7 +16,7 @@ from dataclasses import asdict
 from engine.backtest import Signal, Trade, run_strategy as run_strategy_py
 from engine.market import load_cached_markets, load_markets, cache_markets
 from engine.metrics import compute_metrics, save_metrics, save_trades
-from engine.sizing import DEFAULT_SIZINGS
+from engine.sizing import DEFAULT_SIZINGS, KellyState, kelly_size
 
 _MARKETS = None
 
@@ -28,8 +28,13 @@ def import_strategy(module_path: str, class_name: str):
     return getattr(mod, class_name)
 
 
-def _signal_to_tuple(sig: Signal):
-    return (sig.side, int(sig.entry_idx), int(sig.exit_idx) if sig.exit_idx is not None else None)
+def _signal_to_tuple(sig: Signal, shares: int = 0):
+    return (
+        sig.side,
+        int(sig.entry_idx),
+        int(sig.exit_idx) if sig.exit_idx is not None else None,
+        shares,
+    )
 
 
 def run_strategy_rust(strategy, markets, sizing, initial_balance: float) -> list[Trade]:
@@ -39,12 +44,26 @@ def run_strategy_rust(strategy, markets, sizing, initial_balance: float) -> list
     sizing_json = json.dumps(asdict(sizing))
     all_trades: list[Trade] = []
     balance = initial_balance
+    kelly_state = KellyState()
+    use_kelly = sizing.mode == "kelly_quarter"
 
     for market in markets:
         signals = strategy.generate_signals(market)
         if not signals:
             continue
-        signal_tuples = [_signal_to_tuple(s) for s in signals]
+
+        signal_tuples = []
+        for sig in signals:
+            shares = 0
+            if use_kelly:
+                entry_price = (
+                    float(market.best_ask_up[sig.entry_idx])
+                    if sig.side == "YES"
+                    else float(market.best_ask_down[sig.entry_idx])
+                )
+                shares = kelly_size(balance, entry_price, sizing, kelly_state)
+            signal_tuples.append(_signal_to_tuple(sig, shares))
+
         rust_trades = polybacktest_rs.run_market(
             market.market_id,
             strategy.name,
@@ -71,6 +90,8 @@ def run_strategy_rust(strategy, markets, sizing, initial_balance: float) -> list
             t = Trade(**rt)
             all_trades.append(t)
             balance += t.pnl
+            if use_kelly:
+                kelly_state.update(t.pnl)
             if balance <= 0:
                 balance = 0.0
                 break

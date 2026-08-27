@@ -186,7 +186,7 @@ jobs:
           echo "class=$CLS" >> $GITHUB_OUTPUT
       - name: Run strategy sizings
         run: |
-          for sk in s1_fixed_200 s2_pctmin_200 s3_pctmin_150; do
+          for sk in s1_fixed_200 s2_pctmin_200 s3_pctmin_150 s4_kelly_quarter_200; do
             echo "=== $sk ==="
             python3 runners/run_strategy.py --data "$DATA_DIR" --cache "$CACHE_PATH" \
               --strategy-module "strategies/${{ matrix.strategy_file }}" \

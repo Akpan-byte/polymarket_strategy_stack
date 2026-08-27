@@ -75,7 +75,7 @@ fn run_market<'py>(
     _rem_sec_arr: PyReadonlyArray1<f64>,
     _elapsed_sec_arr: PyReadonlyArray1<f64>,
     _delta_pct_arr: PyReadonlyArray1<f64>,
-    signals: Vec<(String, usize, Option<usize>)>,
+    signals: Vec<(String, usize, Option<usize>, i64)>,
 ) -> PyResult<Vec<Bound<'py, PyDict>>> {
     let sizing: SizingConfig = serde_json::from_str(sizing_json)
         .map_err(|e| PyErr::new::<pyo3::exceptions::PyValueError, _>(format!("bad sizing json: {e}")))?;
@@ -96,7 +96,7 @@ fn run_market<'py>(
     let mut trades: Vec<Bound<'py, PyDict>> = Vec::with_capacity(signals.len());
     let mut balance = initial_balance;
 
-    for (side, entry_idx, exit_idx_opt) in signals {
+    for (side, entry_idx, exit_idx_opt, explicit_shares) in signals {
         if entry_idx >= n {
             continue;
         }
@@ -109,7 +109,11 @@ fn run_market<'py>(
             continue;
         }
 
-        let shares = sizing.size_trade(balance, entry_price);
+        let shares = if explicit_shares > 0 {
+            explicit_shares
+        } else {
+            sizing.size_trade(balance, entry_price)
+        };
         if shares <= 0 {
             continue;
         }
