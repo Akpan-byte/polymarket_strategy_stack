@@ -56,11 +56,23 @@ jobs:
           printf '%s\n' "$RCLONE_CONFIG_CONTENT" > ~/.config/rclone/rclone.conf
         env:
           RCLONE_CONFIG_CONTENT: ${{ secrets.RCLONE_CONFIG }}
-      - name: Verify rclone remotes
+      - name: Restore markets cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ${{ env.CACHE_PATH }}
+          key: markets-btc5m-is
+          restore-keys: |
+            markets-btc5m-
+      - name: Download IS data from GitHub release (fast path)
+        if: github.event.inputs.data_release != ''
         run: |
-          "$HOME/.local/bin/rclone" listremotes
-          "$HOME/.local/bin/rclone" size "akpanold:polybacktest_60d/polymarket/btc/5m/" --include "2[0-9]*.json.gz" || true
-      - name: Download IS data from Google Drive
+          mkdir -p "$DATA_DIR"
+          gh release download "${{ github.event.inputs.data_release }}" --repo "$GITHUB_REPOSITORY" --pattern "is_data.tar.gz" --dir /tmp
+          tar -xzf /tmp/is_data.tar.gz -C "$DATA_DIR" --strip-components=1
+          echo "Data files:"
+          ls "$DATA_DIR" | wc -l
+      - name: Download IS data from Google Drive (fallback)
+        if: github.event.inputs.data_release == ''
         run: |
           mkdir -p "$DATA_DIR"
           "$HOME/.local/bin/rclone" copy "akpanold:polybacktest_60d/polymarket/btc/5m/" "$DATA_DIR" --include "2[0-9]*.json.gz" --transfers 16 --checkers 32 --progress
@@ -80,7 +92,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: cache/markets.pkl
-          key: markets-${{ github.run_id }}
+          key: markets-btc5m-is
 
   backtest:
     needs: setup-data
@@ -151,8 +163,10 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: cache/markets.pkl
-          key: markets-${{ github.run_id }}
-          fail-on-cache-miss: true
+          key: markets-btc5m-is
+          restore-keys: |
+            markets-btc5m-
+          fail-on-cache-miss: false
       - name: Detect strategy class
         id: detect
         run: |
@@ -336,8 +350,10 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: cache/markets.pkl
-          key: markets-${{ github.run_id }}
-          fail-on-cache-miss: true
+          key: markets-btc5m-is
+          restore-keys: |
+            markets-btc5m-
+          fail-on-cache-miss: false
       - name: Sweep strategy
         run: |
           python3 runners/sweep.py --data "$DATA_DIR" --cache "$CACHE_PATH" \
@@ -369,26 +385,13 @@ jobs:
           pattern: '*'
       - name: Build summary and report
         run: |
-          python3 - <<'PY'
-          import json, glob, os
-          from pathlib import Path
-          metrics = {}
-          for f in glob.glob('artifacts/backtest-*/**/metrics.json', recursive=True):
-              label = Path(f).parent.name
-              with open(f) as fh:
-                  metrics[label] = json.load(fh)
-          with open('summary.json', 'w') as fh:
-              json.dump(metrics, fh, indent=2, default=str)
-          print(f"Aggregated {len(metrics)} metric files")
-          PY
-          python3 runners/report.py --summary summary.json --out FINAL_REPORT.md
+          python3 runners/final_report.py --artifacts artifacts --out FINAL_REPORT_80D_IS.md
       - name: Upload report artifact
         uses: actions/upload-artifact@v4
         with:
           name: final-report
           path: |
-            FINAL_REPORT.md
-            summary.json
+            FINAL_REPORT_80D_IS.md
             artifacts/**/sweep_summary.json
       - name: Install rclone
         run: |
@@ -403,7 +406,6 @@ jobs:
           mkdir -p ~/.config/rclone
           printf '%s\n' "$RCLONE_CONFIG_CONTENT" > ~/.config/rclone/rclone.conf
           "$HOME/.local/bin/rclone" sync artifacts polybacktest:results/gh_actions/${{ github.run_id }}
-          "$HOME/.local/bin/rclone" copy FINAL_REPORT.md polybacktest:results/gh_actions/${{ github.run_id }}/
-          "$HOME/.local/bin/rclone" copy summary.json polybacktest:results/gh_actions/${{ github.run_id }}/
+          "$HOME/.local/bin/rclone" copy FINAL_REPORT_80D_IS.md polybacktest:results/gh_actions/${{ github.run_id }}/
         env:
           RCLONE_CONFIG_CONTENT: ${{ secrets.RCLONE_CONFIG }}
