@@ -16,3 +16,11 @@ artifacts/
 aggregated/
 *.tar.gz
 .DS_Store
+
+engine_rs/target/
+engine_rs/Cargo.lock
+results_local/
+results_rust/
+results_sweep/
+sweeps/
+

@@ -12,7 +12,8 @@ from typing import Dict, List, Tuple
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from engine.backtest import run_strategy
+from dataclasses import asdict
+from engine.backtest import Signal, Trade, run_strategy as run_strategy_py
 from engine.market import load_cached_markets, load_markets, cache_markets
 from engine.metrics import compute_metrics, save_metrics, save_trades
 from engine.sizing import DEFAULT_SIZINGS
@@ -25,6 +26,57 @@ def import_strategy(module_path: str, class_name: str):
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)
     return getattr(mod, class_name)
+
+
+def _signal_to_tuple(sig: Signal):
+    return (sig.side, int(sig.entry_idx), int(sig.exit_idx) if sig.exit_idx is not None else None)
+
+
+def run_strategy_rust(strategy, markets, sizing, initial_balance: float) -> list[Trade]:
+    """Run strategy signals through the Rust execution engine."""
+    import polybacktest_rs
+
+    sizing_json = json.dumps(asdict(sizing))
+    all_trades: list[Trade] = []
+    balance = initial_balance
+
+    for market in markets:
+        signals = strategy.generate_signals(market)
+        if not signals:
+            continue
+        signal_tuples = [_signal_to_tuple(s) for s in signals]
+        rust_trades = polybacktest_rs.run_market(
+            market.market_id,
+            strategy.name,
+            sizing_json,
+            balance,
+            float(market.start_ts),
+            float(market.end_ts),
+            float(market.strike),
+            market.resolution,
+            market.ts,
+            market.spot,
+            market.price_up,
+            market.price_down,
+            market.best_ask_up,
+            market.best_bid_up,
+            market.best_ask_down,
+            market.best_bid_down,
+            market.rem_sec,
+            market.elapsed_sec,
+            market.delta_pct,
+            signal_tuples,
+        )
+        for rt in rust_trades:
+            t = Trade(**rt)
+            all_trades.append(t)
+            balance += t.pnl
+            if balance <= 0:
+                balance = 0.0
+                break
+        if balance <= 0:
+            break
+    return all_trades
 
 
 def _param_label(params: dict) -> str:
@@ -62,7 +114,11 @@ def run_one(args_tuple):
             from engine.market import load_markets
             markets = load_markets(data_dir)
 
-    trades = run_strategy(strategy, markets, sizing, sizing.initial_balance)
+    try:
+        trades = run_strategy_rust(strategy, markets, sizing, sizing.initial_balance)
+    except Exception as e:
+        print(f"Rust engine failed ({e}), falling back to Python")
+        trades = run_strategy_py(strategy, markets, sizing, sizing.initial_balance)
     if markets:
         n_hours = (markets[-1].end_ts - markets[0].start_ts) / 3600.0
     else:
